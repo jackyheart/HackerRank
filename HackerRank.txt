@@ -1,0 +1,389 @@
+HackerRank
+
+
+let n = Int(readLine(strippingNewline: true)!)!
+let string = readLine(strippingNewline: true)!
+let stringArray = readLine(strippingNewline: true)!.split {$0 == " "}.map (String.init)
+let intArray = readLine(strippingNewline: true)!.split {$0 == " "}.map (String.init).map { Int($0)! }
+
+
+
+1(2)23(3)
+[2, 1, 3]
+
+23#(2)24#25#26#23#(3)
+
+idx -> count
+0
+.
+.
+22  -> 5
+23  -> 1 
+24  -> 1
+25  -> 1
+
+
+Cracking Interview
+
+1. (Timeout)
+
+let metaArray = readLine(strippingNewline: true)!.split {$0 == " "}.map (String.init).map { Int($0)! }
+var inputArray = readLine(strippingNewline: true)!.split {$0 == " "}.map (String.init).map { Int($0)! }
+
+let len = metaArray[0]
+let rotationInput = metaArray[1]
+let rotation = rotationInput % len
+var resArray = inputArray
+
+if len > 0 {
+
+    for _ in 0 ..< rotation {
+        let first = resArray[0]
+        for j in 1 ..< len {
+            resArray[j-1] = resArray[j]
+        }
+        resArray[len-1] = first
+    }
+}
+
+var res = ""
+for i in 0 ..< len {
+    res += String(resArray[i]) + " "
+}
+
+print(res)
+
+1. (improvement) - WRONG ANSWER !!
+
+let metaArray = readLine(strippingNewline: true)!.split {$0 == " "}.map (String.init).map { Int($0)! }
+var inputArray = readLine(strippingNewline: true)!.split {$0 == " "}.map (String.init).map { Int($0)! }
+
+let len = metaArray[0]
+let rotationInput = metaArray[1]
+let rotation = rotationInput % len
+var resArray = inputArray
+
+if len > 0 {
+
+    for i in 0 ..< len {
+        let newIdx = (len + (i - rotation)) % 5
+        resArray[newIdx] = inputArray[i]
+    }
+}
+
+var res = ""
+for i in 0 ..< len {
+    res += String(resArray[i]) + " "
+}
+
+print(res)
+
+1. Try this:
+new_index = (i + no_of_left_rotation) % length_of_array
+or this:
+int newLocation = (i + (lengthOfArray - shiftAmount)) % lengthOfArray;
+
+
+bool has_cycle(Node* head) {
+    // Complete this function
+    // Do not write the main method
+    
+    Node *curr = head;
+    int count = 0;
+    
+    while(curr != NULL) {
+        curr->data += 1;
+        printf("%d", curr->data);
+        
+        if(curr->data > 1) {
+            break;
+        }
+        
+        curr = curr -> next;
+    }
+        
+    // while(curr->next != NULL) {
+    //     curr = curr->next;
+    //     count += 1;
+    // }
+    
+    
+    return count;
+}
+
+
+insert(root, key) {
+    increment the value of counter by 1
+
+    if (key is less than the value of root node) {
+        if (root node has no left child) {
+            create a new node with value 'key' as the left child of root node
+        } 
+        else {
+            insert(left child of root node, key)
+        }
+    } 
+    else {
+        if (root node has no right child) {
+            create a new node with value 'key' as the right child of root node
+        } 
+        else {
+            insert(right child of root node, key)
+        }
+    }
+}
+
+
+func frequency(s: String) -> [Int] {
+    var res = [Int].init(repeating: 0, count: 26)
+    var alpha:[String] = []
+    
+    for char in "abcdefghijklmnopqrstuvwxyz" {
+        alpha.append(String(char))
+    }
+    
+    let count = characters.count
+    let characters = Array(s)
+    var isBracket = false
+    var isHash = false
+    var hashCount = 0
+    
+    for i in 0 ..< count {
+        let idx = (count - 1) - i
+        let c = characters[idx]
+        
+        if c == ")" {
+            isBracket = true
+        }
+        
+        if isBracket {
+            
+        }
+    }
+    
+    
+    print(characters)
+    
+    return res
+}
+
+(a, b) (c, d)
+a != c && b != d
+a != d && b != c
+
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int arr[][] = new int[6][6];
+        for(int i=0; i < 6; i++){
+            for(int j=0; j < 6; j++){
+                arr[i][j] = in.nextInt();
+            }
+        }
+        
+        int max = 0;
+        
+        for(int i = 1; i < 5; i++) {
+            for(int j = 1; j < 5; j++) {
+                int topSum = 0;
+                int bottomSum = 0;
+                int val = arr[i][j];
+                
+                for(int k = j - 1; k < (j - 1) + 3; k++) {
+                    topSum += arr[i-1][k];
+                    bottomSum += arr[i+1][k];
+                }
+                int sum = topSum + bottomSum + val;
+                if(sum > max) {
+                    max = sum;
+                }
+            }
+        }
+        
+        System.out.println(max);
+    }
+}
+
+func getSequenceSum(i: Int, j: Int, k: Int) -> Int {
+    var sum = 0
+    var i = i
+    var j = j
+    
+    while i < j {
+        sum += i
+        i += 1
+    }
+    
+    while j >= k {
+        sum += j
+        j -= 1
+    }
+    
+    return sum
+}
+
+kincenvizh
+53
+
+ 1 kincenvizh
+ 2 kincenviz
+ 3 kincenvi
+ 4 kincenv
+ 5 kincen
+ 6 kince
+ 7 kinc
+ 8 kin
+ 9 ki
+10 k
+11 incenvizh
+12 incenviz
+13 incenvi
+14 incenv
+15 incen
+16 ince
+17 inc
+18 in
+19 i
+20 ncenvizh
+21 ncenviz
+22 ncenvi
+23 ncenv
+24 ncen
+25 nce
+26 nc
+27 n
+28 cenvizh
+29 cenviz
+30 cenvi
+31 cenv
+32 cen
+33 ce
+34 c
+35 envizh
+36 enviz
+37 envi
+38 env
+39 en
+40 e
+41 nvizh
+42 nviz
+43 nvi
+44 nv
+45 vizh
+46 viz
+47 vi
+48 v
+49 izh
+50 iz
+51 zh
+52 z
+53 h
+
+Substring:
+ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu
+
+substring res:
+499011
+
+runtime error:
+ for i in 1 ..< n {
+        let pref = String(s.prefix(i))
+        if hash[pref] == nil {
+            hash[pref] = true
+            res.append(pref)
+        }
+        
+        let suff = String(s.suffix(i * -1))
+        if hash[suff] == nil {
+            hash[suff] = true
+            res.append(suff)
+        }
+        
+        let startIdx = s.index(s.startIndex, offsetBy:i)
+        let endIdx = s.index(s.endIndex, offsetBy: i * -1)
+        if startIdx < endIdx {
+            let middle = String(s[startIdx ..< endIdx])
+                if hash[middle] == nil {
+                hash[middle] = true
+                res.append(middle)
+            }
+        }
+    }
+
+func cardinalitySort(nums: [Int]) -> [Int] {
+    var hash:[Int:Int] = [:]
+    
+    for n in nums {
+        let strBin = String(n, radix: 2)
+        var sum = 0
+        var valN = n
+        for _ in 0 ..< strBin.count {
+            sum += valN & 1
+            valN >>= 1
+        }
+        print("n:\(n), cardinal:\(sum)")
+        
+        hash[n] = sum
+    }
+    
+    let sorted = nums.sorted(by: { hash[$0]! < hash[$1]! })
+    return sorted
+}
+
+public class Solution {
+    private static final Scanner scan = new Scanner(System.in);
+    
+    public static void main(String args[]) throws Exception {
+        // read the string filename
+        String filename;
+        filename = scan.nextLine();
+        
+        HashMap<String, Integer> hash = new HashMap<String, Integer>();
+        
+        BufferedReader in = new BufferedReader(new FileReader(filename));
+        while (in.ready()) {
+            String line = in.readLine();
+            StringTokenizer tokenizer = new StringTokenizer(line, " -- ");
+            String host = tokenizer.nextToken();
+            if(hash.get(host) == null) {
+                hash.put(host, 1);
+            } else {
+                int val = hash.get(host);
+                hash.put(host, val + 1);
+            }
+            
+            System.out.println(host);
+        }
+        
+        PrintWriter out = new PrintWriter(new FileWriter("records_" + filename));
+        Set set = hash.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry)iterator.next();
+            String host = String.valueOf(entry.getKey());
+            int numReq = (int)entry.getValue();
+            
+            out.println(host + " " + numReq);
+        }
+        out.close();
+    }
+}
+
+jacky.rank1@gmail.com
+hacker.jack109@gmail.com --> high chance
+andy@dispostable.com
+mary@dispostable.com
+anomaly@dispostable.com
+anomaly2@dispostable.com
+anonymous@dispostable.com
+dex@dispostable.com
+
+ip address:
+Waterina:
+116.87.184.249
+
+
+
+
