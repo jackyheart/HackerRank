@@ -620,13 +620,13 @@ class ViewController: UIViewController {
             let binStrArr = Array(binStr).map { String($0) }
             let countOnes = binStrArr.filter { $0 == "1" }.count
             hash[e] = countOnes
-            print("e: \(e), bin: \(binStr), count: \(countOnes), hash[\(e)]: \(hash[e]!)")
+            //print("e: \(e), bin: \(binStr), count: \(countOnes), hash[\(e)]: \(hash[e]!)")
         }
         
         let sorted = res.sorted(by: {
             
             if hash[$0]! == hash[$1]! {
-                print("$0: \($0), $1: \($1)")
+                //print("$0: \($0), $1: \($1)")
                 return $0 < $1
             }
             
@@ -661,6 +661,81 @@ class ViewController: UIViewController {
         }
         
         return count
+    }
+    
+    //all passed !!!
+    func braces(values: [String]) -> [String] {
+        
+        var res:[String] = []
+        
+        for v in values {
+            
+            var stack:[String] = []
+            let n = v.count
+            if n % 2 == 1 {
+                res.append("NO")
+            } else {
+                let chars = Array(v).map { String($0) }
+                for c in chars {
+                    if c == "(" {
+                        stack.append(")")
+                    } else if c == "[" {
+                        stack.append("]")
+                    } else if c == "{" {
+                        stack.append("}")
+                    } else {
+                        let top = stack.last
+                        if top == c {
+                            stack.removeLast()
+                        }
+                    }
+                }
+                
+                if stack.isEmpty {
+                    res.append("YES")
+                } else {
+                    res.append("NO")
+                }
+            }
+        }
+        
+        return res
+    }
+    
+    //8/10 !!
+    func move(_ x:Int, _ y:Int, _ x2: Int, _ y2: Int) -> Bool {
+        
+        print("(x, y): \(x), \(y)")
+        
+        if x == x2 && y == y2 {
+            return true
+        } else {
+            
+            if x != x2 {
+                if x < x2 {
+                    return move(x + y, y, x2, y2)
+                } else {
+                    //return false
+                }
+            }
+            
+            if y != y2 {
+                if y < y2 {
+                    return move(x, y + x, x2, y2)
+                } else {
+                    //return false
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func canReach(x1: Int, y1: Int, x2: Int, y2: Int) -> String {
+        //var x = x1
+        //var y = x1
+        
+        return move(x1, y1, x2, y2) ? "Yes" : "No"
     }
 }
 
