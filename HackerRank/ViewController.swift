@@ -55,7 +55,7 @@ class ViewController: UIViewController {
          */
         
         //twins2(["abbc", "abbdd"], ["abbc", "ddbba"])
-        getMin(s: "00000")
+        //getMin(s: "00000")
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +81,16 @@ class ViewController: UIViewController {
         let val = n ^ 0b111
         print("Binary:", String(val, radix: 2))
         print("")
+    }
+    
+    /*
+        50 -> 13
+        100 -> 27
+        401 -> 110
+     */
+    func getIntegerComplement(_ n: Int) -> Int {
+        let binStr = String(n, radix: 2)
+        let n = binStr.characters.count
     }
     
     func solutionEncodedString(_ s:String) {
@@ -691,6 +701,7 @@ class ViewController: UIViewController {
         print("res count (sub2): \(res.count)")
     }
     
+    //all passed !!! (Last Substring)
     func countSubstring3() {
         let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
         var res:[String] = []
@@ -1286,19 +1297,31 @@ class ViewController: UIViewController {
     //poor performance...
     func findMatrix2(a: [[Int]]) -> [[Int]] {
         var res = a
+        var tmp = a
+        
         let row = a.count
         
         for x in 0 ..< row {
             for y in 0 ..< row {
-                var s = 0
-                for i in 0 ..< x + 1 {
-                    for j in 0 ..< y + 1 {
-                        s += a[i][j]
+                
+                if x == 0 && y == 0 {
+                    res[x][y] = a[x][y]
+                } else {
+                    if y > 0 {
+                        tmp[x][y] = tmp[x][y] + tmp[x][y-1]
+                    }
+                    
+                    if x == 0 {
+                        res[x][y] = tmp[x][y]
+                    } else {
+                        res[x][y] += tmp[x-1][y]
                     }
                 }
-                res[x][y] = s
             }
         }
+        
+        print(res)
+        
         return res
     }
     
@@ -1374,7 +1397,297 @@ class ViewController: UIViewController {
         return ""
     }
     
-    //== Passed section !!
+    /*
+     * Complete the function below. (Zig Zag)
+     */
+    
+    /*
+     0 0
+     3 3
+     2 3
+     0 2
+     2 0
+     0 3
+     
+     exp: 2
+     
+     24331 11582
+     40676 17095
+     36278 30532
+     41086 28684
+     20917 27058
+     12962 30532
+     12962 27058
+     12686 41706
+     11904 36954
+     36278 27058
+     20917 30532
+     28688 28593
+     37112 27058
+     18069 27058
+     32436 27058
+     37390 21596
+     18069 30532
+     27549 28756
+     32436 30532
+     37112 30532
+     
+     exp 6
+     
+     21121 19969
+     31885 37104
+     29984 30461
+     38734 30461
+     10024 30461
+     38734 19969
+     32008 30461
+     28517 19969
+     29984 19969
+     21121 30461
+     31300 19969
+     41543 30461
+     10024 19969
+     32009 19969
+     32008 19969
+     21560 26580
+     32009 30461
+     28517 30461
+     41543 19969
+     31300 30461
+     
+     exp 6
+     */
+    struct Point {
+        var x = 0
+        var y = 0
+        
+        init(_ x1:Int, _ y1:Int) {
+            x = x1
+            y = y1
+        }
+    }
+    
+    func maxPoints(_ points: [String]) -> Int {
+        var res:[Point] = []
+        
+        for pStr in points {
+            let pArr = pStr.characters.split(separator: " ").map(String.init)
+            let point = Point(Int(pArr[0])!, Int(pArr[1])!)
+            res.append(point)
+        }
+        
+        let sorted = res.sorted(by: {
+            
+            if $0.x == $1.x {
+                return $0.y < $1.y
+            }
+            
+            return $0.x < $1.x
+        })
+        
+        //print(sorted)
+        
+        var isYMode = true //starts with Y direction
+        let n = sorted.count
+        var xArr:[Point] = []
+        var yArr:[Point] = []
+        
+        for i in 0 ..< n {
+            let p = sorted[i]
+            
+            if i == 0 {
+                xArr.append(p)
+            } else {
+                //peek
+                if i + 1 < n {
+                    if isYMode {
+                        
+                        if yArr.isEmpty {
+                            if sorted[i+1].x != p.x {
+                                yArr.append(p)
+                                isYMode = false
+                            }
+                        } else {
+                            let lastYPoint = yArr.last!
+                            
+                            if sorted[i+1].x != p.x && lastYPoint.y == p.y {
+                                yArr.append(p)
+                                isYMode = false
+                            }
+                        }
+                        
+                    } else {
+                        
+                        let lastXPoint = xArr.last!
+                        
+                        if sorted[i+1].y != p.y && lastXPoint.y == p.y {
+                            xArr.append(p)
+                            isYMode = true
+                        }
+                    }
+                }
+            }
+        }
+        
+        return yArr.count
+    }
+    
+    /*
+     * Complete the function below.
+     */
+    /*
+     * For the unweighted graph, {name}:
+     * 1. The number of nodes is {name}Nodes.
+     * 2. The number of edges is {name}Edges.
+     * 3. An edge exists between {name}From[i] and {name}To[i].
+     */
+    //11/14
+    func maximumDifference(_ gNodes: Int, _ gFrom: [Int], _ gTo: [Int]) -> Int {
+        
+        var res:[[Int]] = []
+        
+        for _ in 0 ..< gNodes {
+            res.append([])
+        }
+        
+        for i in 0 ..< gFrom.count {
+            let f = gFrom[i]
+            let t = gTo[i]
+            
+            if i == 0 {
+                res[0].append(f)
+                res[0].append(t)
+            } else {
+                
+                for j in 0 ..< res.count {
+                    let r = res[j]
+                    
+                    if r.isEmpty {
+                        res[j].append(f)
+                        res[j].append(t)
+                        break
+                    } else {
+                        if r.contains(f) {
+                            res[j].append(t)
+                            break
+                        } else if r.contains(t) {
+                            res[j].append(f)
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        
+        var maxRes = 0
+        for r in res {
+            if let max = r.max(), let min = r.min() {
+                let diff = max - min
+                if diff > maxRes {
+                    maxRes = diff
+                }
+            }
+        }
+        
+        //print(res)
+        
+        return maxRes
+    }
+    
+    /*
+     * Complete the function below.
+     */
+    
+    /*
+     aab
+     baa
+     res: 1
+     */
+    
+    /*
+     wszauoffphsyyyrvcfsewdrdwpocydurpzvsmfzcpiwwvhrjvwfsresfbckiubyhkulwigowqggznidxleylyqhwms
+     qagrsoehismggrurufqzlckfzwwwoslrvuuhpesyvcrcixyozpbjkfhywzbvpynilmcyhdywiwwvdfswdefwpfyssd
+     res: 656
+     */
+    
+    func easyStrings(a: String, b: String) -> Int {
+        
+        var count = 0
+        
+        if a != b {
+            let charsA = Array(a).map(String.init)
+            let charsB = Array(b).map(String.init)
+            
+            let n = charsA.count
+            var aArr = charsA
+            
+            //try swap
+            aArr.swapAt(0, aArr.count - 1)
+            if aArr.joined() == b {
+                return 1
+            } else {
+                aArr = charsA
+                var joined = aArr.joined()
+                var i = 0
+                
+                while joined != b {
+                    
+                    if i + 1 < n {
+                        aArr.swapAt(i, i + 1)
+                        count += 1
+                    } else {
+                        i = 0
+                    }
+                    
+                    joined = aArr.joined()
+                }
+            }
+        }
+        
+        return count
+    }
+    
+    //correct count !!
+    func findMatrix2(_ a: [[Int]]) -> [[Int]] {
+        var res = a
+        var tmp = a
+        
+        let row = a.count
+        
+        for x in 0 ..< row {
+            for y in 0 ..< row {
+                
+                if x == 0 && y == 0 {
+                    res[x][y] = a[x][y]
+                } else {
+                    
+                    if y == 0 {
+                        tmp[x][y] = a[x][y]
+                    }
+                    else {
+                        tmp[x][y] = tmp[x][y] + tmp[x][y-1]
+                    }
+                    
+                    if x == 0 {
+                        res[x][y] = tmp[x][y]
+                    } else {
+                        res[x][y] = tmp[x][y] + res[x-1][y]
+                    }
+                }
+            }
+        }
+        
+        //        print("tmp:")
+        //        print(tmp)
+        //
+        //        print("res:")
+        //        print(res)
+        
+        return res
+    }
+
+    
+    //==== Passed section !!
     
     //all passed !!
     func numberOfPairs(a: [Int], k: Int) -> Int {
