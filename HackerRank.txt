@@ -371,6 +371,138 @@ public class Solution {
     }
 }
 
+
+    ===================
+
+permutation % 8 
+//2/10
+
+    private static String swap(String a, int i, int j)
+    {
+        char temp;
+        char[] charArray = a.toCharArray();
+        temp = charArray[i] ;
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        return String.valueOf(charArray);
+    }
+
+    private static boolean permute(String str, int l, int r)
+    {
+        if (l == r) {
+            //System.out.println(str);
+            int intVal = Integer.parseInt(str);
+            if(intVal % 8 == 0) {
+                return true;
+            }
+            
+            return false;
+        }
+        else
+        {
+            for (int i = l; i <= r; i++)
+            {
+                str = swap(str,l,i);
+                boolean val = permute(str, l+1, r);
+                if(val) {
+                    return true;
+                }
+                
+                str = swap(str,l,i);
+            }
+        }
+        
+        return false;
+    }
+
+    static String[] checkDivisibility(String[] arr) {
+        String[] res = new String[arr.length];
+        
+        for(int i=0; i < arr.length; i++) {
+            boolean val = permute(arr[i], 0, arr.length - 1);
+            if(val) {
+                res[i] = "YES";   
+            } else {
+                res[i] = "NO";
+            }
+        }
+        
+        return res;
+    }
+
+    ===================
+
+    Twin strings: Wrong answer !
+2
+abbc
+abbdd
+2
+abbc
+ddbba
+
+expected
+Yes
+Yes
+
+==========================
+
+public class LongestChain {
+
+    public static void main(String[] args) {
+        String[] words = {
+                "a",
+                "b",
+                "ba",
+                "bca",
+                "bda",
+                "bdca"
+        };
+
+        System.out.println("Longest Chain Length : " + longest_chain(words));
+    }
+
+    static int longest_chain(String[] w) {
+        if (null == w || w.length < 1) {
+            return 0;
+        }
+
+        int maxChainLen = 0;
+
+        HashSet<String> words = new HashSet<>(Arrays.asList(w));
+        HashMap<String, Integer> wordToLongestChain = new HashMap<>();
+
+        for (String word : w) {
+            if (maxChainLen > word.length()) {
+                continue;
+            }
+            int curChainLen = find_chain_len(word, words, wordToLongestChain) + 1;
+            wordToLongestChain.put(word, curChainLen);
+            maxChainLen = Math.max(maxChainLen, curChainLen);
+        }
+        return maxChainLen;
+    }
+
+    static int find_chain_len(String word, HashSet<String> words, HashMap<String, Integer> wordToLongestChain) {
+        int curChainLen = 0;
+
+        for (int i = 0; i < word.length(); i++) {
+            String nextWord = word.substring(0, i) + word.substring(i + 1);
+            if (words.contains(nextWord)) {
+                if (wordToLongestChain.containsKey(nextWord)) {
+                    curChainLen = Math.max(curChainLen, wordToLongestChain.get(nextWord));
+                } else {
+                    int nextWordChainLen = find_chain_len(nextWord, words, wordToLongestChain);
+                    curChainLen = Math.max(curChainLen, nextWordChainLen + 1);
+                }
+            }
+        }
+
+        return curChainLen;
+    }
+}
+
+
+
 jacky.rank1@gmail.com
 hacker.jack109@gmail.com --> high chance
 andy@dispostable.com
@@ -379,10 +511,14 @@ anomaly@dispostable.com
 anomaly2@dispostable.com
 anonymous@dispostable.com
 dex@dispostable.com
+dex3@dispostable.com
 
 ip address:
 Waterina:
 116.87.184.249
+
+pixerf ip address:
+116.12.138.25
 
 
 
