@@ -514,6 +514,85 @@ class ViewController: UIViewController {
         return fullS
     }
     
+    func missingWords3(s: String, t: String) -> [String] {
+        
+        var res:[String] = []
+        
+        var fullTextArr = s.split{$0 == " "}.map(String.init)
+        let subTextArr = t.split{$0 == " "}.map(String.init)
+        for sub in subTextArr {
+            
+            if let idx = fullTextArr.index(of: sub) {
+                fullTextArr.remove(at: idx)
+            }
+            
+            //            var idx = fullTextArr.index(of: sub)
+            //            while idx != nil {
+            //                fullTextArr.remove(at: idx!)
+            //                idx = fullTextArr.index(of: sub)
+            //            }
+        }
+        
+        return res
+    }
+    
+    func indicesOf(fullString: String, string: String) -> [Int] {
+        var indices = [Int]()
+        var searchStartIndex = fullString.startIndex
+        
+        while searchStartIndex < fullString.endIndex,
+            let range = fullString.range(of: string, range: searchStartIndex..<fullString.endIndex),
+            !range.isEmpty
+        {
+            let index = fullString.distance(from: fullString.startIndex, to: range.lowerBound)
+            indices.append(index)
+            searchStartIndex = range.upperBound
+        }
+        
+        return indices
+    }
+    
+    //JS code
+    
+    /*
+    function missingWords(s, t) {
+    
+        if(t.length === 0)
+            return s
+    
+        var re = /\s+/;
+    
+        var sArray = s.trim().split(re);
+        var tArray = t.trim().split(re);
+        var missingWords = []
+        sArray.forEach(word => {
+            if(!tArray.includes(word))
+                missingWords.push(word)
+        })
+    
+        return missingWords;
+    }
+    */
+    
+    /*
+    function missingWords(s, t) {
+    
+        var missing = [];
+        var a = s. split(' ');
+        var b = t.split(' ');
+    
+        for(var i=0, j=0; i < a.length; i++) {
+            if(a[i] !== b[j]) {
+                missing.push(a[i]);
+            } else {
+                j++;
+            }
+        }
+    
+        return missing;
+    }
+    */
+
     //21/100 ??
     func closestNumbers(numbers: [Int]) -> Void {
         let n = numbers.count
@@ -736,6 +815,209 @@ class ViewController: UIViewController {
         //var y = x1
         
         return move(x1, y1, x2, y2) ? "Yes" : "No"
+    }
+    
+    
+    func countSubstring1() {
+        let s = "kivzeth"
+        var res:[String] = []
+        
+        for i in 1 ..< s.count {
+            let pref = String(s.prefix(i))
+            res.append(pref)
+            
+            let suff = String(s.suffix(i))
+            res.append(suff)
+            
+            let startIdx = s.index(s.startIndex, offsetBy: i)
+            let endIdx = s.index(s.endIndex, offsetBy: i * -1)
+            if startIdx < endIdx {
+                let middle = String(s[startIdx ..< endIdx])
+                res.append(middle!)
+            }
+        }
+    }
+    
+    func countSubstring2() {
+        let s = "kivzeth"
+        var res:[String] = []
+        let chars = Array(s).map { String($0) }
+        
+        for i in 1 ..< s.count {
+            let pref = chars[0 ..< i].joined()
+            res.append(pref)
+            //print("pref: \(pref)")
+            
+            let suff = chars[(s.count - i) ..< s.count].joined()
+            res.append(suff)
+            //print("suff: \(suff)")
+            
+            if i < s.count - i {
+                let middle = chars[i ..< s.count - i].joined()
+                res.append(middle)
+                //print("middle i: \(i), s.count - i: \(s.count - i)")
+                //print("middle: \(middle)\n")
+            }
+        }
+    }
+    
+    func countBinaryOne() {
+        let input = [5, 99, 9971, 9999999]
+        var res:[String] = []
+        
+        for n in input {
+            var sum = 0
+            var valN = n
+            let binStr = String(n, radix: 2)
+            for _ in binStr {
+                sum += valN & 1
+                valN >>= 1
+            }
+            res.append("\(n), \(binStr): \(sum)")
+        }
+        
+        print(res)
+    }
+    
+    func countBinaryOne2() {
+        let input = [5, 99, 9971, 9999999]
+        var res:[String] = []
+        
+        for n in input {
+            let binStr = String(n, radix: 2)
+            let arrBinStr = Array(binStr)
+            let sum = arrBinStr.filter({ $0 == "1" }).count
+            res.append("\(n), \(binStr): \(sum)")
+        }
+        
+        print(res)
+    }
+    
+    // Swift 3
+    func evaluateProblem()
+    {
+        let start = DispatchTime.now() // <<<<<<<<<< Start time
+        countBinaryOne()
+        let end = DispatchTime.now()   // <<<<<<<<<<   end time
+        
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
+        let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
+        
+        print("Time to evaluate problem: \(timeInterval) seconds")
+    }
+    
+    func evaluateProblem2()
+    {
+        let start = DispatchTime.now() // <<<<<<<<<< Start time
+        countBinaryOne2()
+        let end = DispatchTime.now()   // <<<<<<<<<<   end time
+        
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
+        let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
+        
+        print("Time to evaluate problem: \(timeInterval) seconds")
+    }
+    
+    //all passed !!
+    func cardinalitySort(nums: [Int]) -> [Int] {
+        var hash:[Int:Int] = [:]
+        let res = nums
+        
+        for n in nums {
+            let binStr = String(n, radix: 2)
+            let arrBinStr = Array(binStr)
+            let sum = arrBinStr.filter({ $0 == "1" }).count
+            hash[n] = sum
+        }
+        
+        let sorted = res.sorted(by: {
+            
+            let hash0 = hash[$0]!
+            let hash1 = hash[$1]!
+            
+            if hash0 == hash1 {
+                return $0 < $1
+            }
+            
+            return hash0 < hash1
+        })
+        
+        print(sorted)
+        
+        return sorted
+    }
+    
+    func findMatrix(a: [[Int]]) -> [[Int]] {
+        var res = a
+        let row = a.count
+        
+        if row > 0 {
+            let col = a[0].count
+            
+            for i in 0 ..< row {
+                for j in 0 ..< col {
+                    res[i][j] = 0
+                }
+            }
+        }
+        
+        return res
+    }
+    
+    /*
+     func readComp() {
+     
+     let n = Int(readLine(strippingNewline: true)!)!
+     
+     for _ in 0 ..< n {
+     let metaArray = readLine(strippingNewline: true)!.characters.split {$0 == " "}.map (String.init)
+     let exp = Int(metaArray[0])
+     let numString = Int(metaArray[1])
+     
+     let stringArray = readLine(strippingNewline: true)!.characters.split {$0 == " "}.map (String.init)
+     var hash:[String:Int] = [:]
+     for s in stringArray {
+     let chars = Array(s).map { String($0) }
+     for c in chars {
+     if hash[c] == nil {
+     hash[c] = 0
+     } else {
+     hash[c]! += hash[c]! + 1
+     }
+     }
+     }
+     
+     var sum = 0
+     for key in hash.keys {
+     let times = hash[key]
+     let ascii = UInt8(ascii: key)
+     let p = pow(ascii, exp) * times
+     sum += p
+     }
+     
+     if sum % 2 == 0 {
+     print("EVEN")
+     } else {
+     print("ODD")
+     }
+     }
+     }
+     */
+    
+    func readAscii() {
+        let chars = ["a", "b", "c", "d", "e", "z", "A", "B", "Z"]
+        
+        for c in chars {
+            //"a".characterAtIndex(0)
+            let nsString = c as NSString
+            let ascii = nsString.character(at: 0)
+            print("\(nsString): \(ascii)")
+        }
+        
+        let aAscii = ("a" as NSString).character(at: 0)
+        let bAscii = ("b" as NSString).character(at: 0)
+        let diff = bAscii - aAscii
+        print("diff: \(diff)")
     }
 }
 
