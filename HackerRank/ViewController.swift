@@ -1537,18 +1537,6 @@ class ViewController: UIViewController {
      E4             Multiple roots
      E5             Any other error
      */
-
-    class Node {
-        var val = ""
-        var left:Node? = nil
-        var right:Node? = nil
-        
-        init(_ v:String, _ l:Node?, _ r:Node?) {
-            val = v
-            left = l
-            right = r
-        }
-    }
     
     func SExpression(_ nodes: String) -> String {
         
@@ -1613,18 +1601,33 @@ class ViewController: UIViewController {
              F
      */
     
+    class Node {
+        var val = ""
+        var parent:Node? = nil
+        var left:Node? = nil
+        var right:Node? = nil
+        
+        init(_ v:String, _ l:Node?, _ r:Node?) {
+            val = v
+            left = l
+            right = r
+        }
+    }
+    
     func SExpression2(_ nodes: String) -> String {
         
         if nodes.isEmpty {
+            //other errors
             return "E5"
         }
         
         var res:[Node] = []
         var root:Node? = nil
+        var disconnectedNode:Node? = nil
         
-        let splitNodes = nodes.split{$0 == " "}.map(String.init)
+        let splitNodes = nodes.characters.split{$0 == " "}.map(String.init)
         for nodeStr in splitNodes {
-            let nodeStrArr = Array(nodeStr).map(String.init)
+            let nodeStrArr = Array(nodeStr.characters).map { String($0) }
             let val1 = nodeStrArr[1]
             let val2 = nodeStrArr[3]
             
@@ -1636,41 +1639,89 @@ class ViewController: UIViewController {
                 res.append(node2)
                 
                 node1.left = node2
+                node2.parent = node1
                 root = node1 // root here
                 
             } else {
                 
                 let node1 = Node(val1, nil, nil)
                 let node2 = Node(val2, nil, nil)
-                var isNode1Found = false
+                var isParentOrChildFound = false
                 
-                for r in res {
-                    if r.val == node1.val {
-                        
-                        let curNode = r
-                        if curNode.left != nil {
-                            curNode.right = node2
-                        } else {
-                            curNode.left = node2
-                        }
-                        
-                        isNode1Found = true
+                if let idx = res.index(where: { $0.val == node1.val }) {
                     
-                        break
+                    //parent found
+                    
+                    let r = res[idx]
+                    
+                    var childNode = node2
+                    if let idx = res.index(where: { $0.val == node2.val }) {
+                        childNode = res[idx]
+                        disconnectedNode = nil
                     }
+                    
+                    if r.parent != nil && childNode.parent != nil {
+                        //duplicate edges (??)
+                        return "E2"
+                    }
+                    
+                    if childNode.parent != nil {
+                        //cycle detected
+                        return "E3"
+                    }
+                    
+                    if r.left == nil {
+                        r.left = childNode
+                    } else if r.right == nil {
+                        r.right = childNode
+                    } else {
+                        //more than 2 children
+                        return "E1"
+                    }
+                    
+                    childNode.parent = r
+                    
+                    isParentOrChildFound = true
+                }
+                else if let idx = res.index(where: { $0.val == node2.val }) {
+                    
+                    //child found
+                    
+                    let r = res[idx]
+                    
+                    if r.parent != nil {
+                        //cycle detected
+                        return "E3"
+                    }
+                    
+                    if node1.left == nil {
+                        node1.left = r
+                    } else if node1.right == nil {
+                        node1.right = r
+                    } else {
+                        //more than 2 children
+                        return "E1"
+                    }
+                    r.parent = node1
+                    
+                    root = node1
+                    
+                    isParentOrChildFound = true
                 }
                 
-                if !isNode1Found {
+                if !isParentOrChildFound {
                     
-                    if node1.left != nil {
+                    if node1.left == nil {
+                        node1.left = node2
+                    } else if node1.right == nil {
                         node1.right = node2
                     } else {
-                        node1.left = node2
+                        //more than 2 children
+                        return "E1"
                     }
+                    node2.parent = node1
                     
-                    if res.contains(where: { $0.val == node2.val }) {
-                        root = node1//move root here
-                    }
+                    disconnectedNode = node1
                 }
                 
                 if !res.contains(where: { $0.val == node1.val }) {
@@ -1683,7 +1734,119 @@ class ViewController: UIViewController {
             }
         }
         
+        if disconnectedNode != nil {
+            //multiple roots
+            return "E4"
+        }
+        
+        //let exp = printTreeExpression(root, "")
+        //print(exp)
+        //printTreeStack(root)
+        //printPreorderRecurs(root)
+        printPreorderStack(root)
+        
         return ""
+    }
+    
+    func printTreeExpression(_ root:Node?, _ expStr:String) -> String {
+        
+        var exp = expStr
+        
+        if root?.left == nil && root?.right == nil {
+            exp += "(\(root?.val ?? ""))"
+            return exp
+        } else {
+            exp += "("
+            printTreeExpression(root?.left, exp)
+            printTreeExpression(root?.right, exp)
+        }
+        
+        return exp
+    }
+    
+    func printPreorderRecurs(_ root: Node?) {
+        if root == nil {
+            print(")")
+            return
+        }
+        
+        print("(")
+        print("\(root?.val ?? "") ")
+        
+        printPreorderRecurs(root?.left)
+        printPreorderRecurs(root?.right)
+    }
+    
+    func printPreorderStack(_ root:Node?) {
+        var stack:[Node?] = []
+        
+        var temp:Node? = root
+        
+        if root == nil {
+            return
+        }
+        
+        stack.append(root)
+        var exp = ""
+        var countBrackets = 0
+        
+        while !stack.isEmpty {
+            temp = stack.removeLast()
+            exp += "("
+            exp += temp?.val ?? ""
+            
+            if temp?.right != nil {
+                stack.append(temp?.right)
+                countBrackets += 1
+            }
+            
+            if temp?.left != nil {
+                stack.append(temp?.left)
+                countBrackets += 1
+            }
+            
+            if temp?.right == nil && temp?.left == nil {
+                let closeBrackets = [String].init(repeating: ")", count: countBrackets-1)
+                let closeBracketsStr = closeBrackets.joined()
+                exp += closeBracketsStr
+                
+                countBrackets = 0
+            }
+        }
+        
+        exp += "))"
+        
+        print(exp)
+        print("")
+    }
+    
+    func printTreeStack(_ root:Node?) {
+        var stack:[Node?] = []
+        var node = root
+        
+        //first node to be visited will be the left one
+        while node != nil {
+            stack.append(node)
+            node = node?.left
+        }
+        
+        var exp = ""
+        
+        while stack.count > 0 {
+            
+            // visit the top node
+            node = stack.removeLast()
+            exp += "\(node?.val ?? "") "
+            if node?.right != nil {
+                node = node?.right
+                
+                // the next node to be visited is the leftmost
+                while node != nil {
+                    stack.append(node)
+                    node = node?.left
+                }
+            }
+        }
     }
     
     /*
@@ -2065,6 +2228,37 @@ class ViewController: UIViewController {
         }
         
         return count
+    }
+    
+    func substringCalculator2() -> Int {
+        
+        //expected: 499011
+        
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        
+        let chars = Array(s.characters).map { String($0) }
+        let n = s.characters.count
+        var hash:[String:Int] = [:]
+        
+        for i in 0 ..< n {
+            
+            let c = chars[i]
+            
+            if hash[c] == nil {
+                hash[c] = 1
+            } else {
+                hash[c]! += 1
+            }
+        }
+        
+        let duplicates = hash.filter({ $0.value > 1 })
+        let sum = (n * (n + 1)) / 2
+        let total = sum - duplicates.count
+        
+        print("total: \(total)")
+        //still wrong answer !
+        
+        return total
     }
 
     //====================================================================================================================================================================//

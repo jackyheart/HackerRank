@@ -227,6 +227,11 @@ func getSequenceSum(i: Int, j: Int, k: Int) -> Int {
 kincenvizh
 53
 
+len: 10
+count: 10 + 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 = 55
+duplicate: 2
+total: count - duplicate = 55 - 2 = 53
+
  1 kincenvizh
  2 kincenviz
  3 kincenvi
@@ -237,6 +242,7 @@ kincenvizh
  8 kin
  9 ki
 10 k
+
 11 incenvizh
 12 incenviz
 13 incenvi
@@ -246,6 +252,7 @@ kincenvizh
 17 inc
 18 in
 19 i
+
 20 ncenvizh
 21 ncenviz
 22 ncenvi
@@ -254,6 +261,7 @@ kincenvizh
 25 nce
 26 nc
 27 n
+
 28 cenvizh
 29 cenviz
 30 cenvi
@@ -261,24 +269,30 @@ kincenvizh
 32 cen
 33 ce
 34 c
+
 35 envizh
 36 enviz
 37 envi
 38 env
 39 en
 40 e
+
 41 nvizh
 42 nviz
 43 nvi
 44 nv
+
 45 vizh
 46 viz
 47 vi
 48 v
+
 49 izh
 50 iz
+
 51 zh
 52 z
+
 53 h
 
 Substring:
@@ -614,96 +628,6 @@ unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /images/NASA-logosmal
 unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /images/KSC-logosmall.gif HTTP/1.0" 200 1204
 d104.aa.net - - [01/Jul/1995:00:00:15 -0400] "GET /shuttle/countdown/count.gif HTTP/1.0" 200 40310
 d104.aa.net - - [01/Jul/1995:00:00:15 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 200 786
-
-burger.letters.com 3
-d104.aa.net 3
-unicomp6.unicomp.net 4
-
-my output:
-[Success] File "records_hosts_access_log_01.txt":
-
-alyssa.prodigy.com 1
-bart 1
-
-burger.letters.com 3
-
-d104.aa.net 4
-dave.dev1.ihub.com 4
-
-lmsmith.tezcat.com 1
-port2.electrotex.com 1
-gayle 1
-pm13.j51.com 1
-dial22.lloyd.com 1
-net 1
-
-dd14 2
-piweba3y.prodigy.com 2
-ppptky391.asahi 2
-gater4.sematech.org 2
-gater3.sematech.org 2
-scheyer.clark.net 2
-waters 2
-www 2
-slip1.yab.com 2
-
-
-dynip42.efn.org 3
-onyx.southwind.net 3
-
-
-
-
-remote27.compusmart.ab.ca 5
-smyth 5
-
-netport 6
-ix 6
-unicomp6.unicomp.net 6
-
-
-port26.annex2.nwlink.com 9
-ppp 9
-
-link097.txdirect.net 11
-
-=====
-expected:
-
-alyssa.prodigy.com 1
-bart-slip1.llnl.gov 1
-burger.letters.com 3
-d104.aa.net 4
-dave.dev1.ihub.com 4
-dd14-012.compuserve.com 1
-dd14-046.compuserve.com 1
-dial22.lloyd.com 1
-dynip42.efn.org 3
-gater3.sematech.org 2
-gater4.sematech.org 2
-gayle-gaston.tenet.edu 1
-ix-or10-06.ix.netcom.com 3
-ix-orl2-01.ix.netcom.com 3
-link097.txdirect.net 11
-lmsmith.tezcat.com 1
-net-1-141.eden.com 1
-netport-27.iu.net 6
-onyx.southwind.net 3
-piweba3y.prodigy.com 2
-pm13.j51.com 1
-port2.electrotex.com 1
-port26.annex2.nwlink.com 9
-ppp-mia-30.shadow.net 6
-ppp-nyc-3-1.ios.com 3
-ppptky391.asahi-net.or.jp 2
-remote27.compusmart.ab.ca 5
-scheyer.clark.net 2
-slip1.yab.com 2
-smyth-pc.moorecap.com 5
-unicomp6.unicomp.net 6
-waters-gw.starway.net.au 2
-www-a1.proxy.aol.com 1
-www-b4.proxy.aol.com 1
 
 
 jacky.rank1@gmail.com
