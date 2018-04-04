@@ -371,6 +371,75 @@ public class Solution {
     }
 }
 
+//all passed ! (great !!)
+public class Solution {
+    private static final Scanner scan = new Scanner(System.in);
+    
+    public static void main(String args[]) throws Exception {
+        // read the string filename
+        String filename;
+        filename = scan.nextLine();
+        
+        HashMap<String, Integer> hash = new HashMap<String, Integer>();
+        
+        BufferedReader in = new BufferedReader(new FileReader(filename));
+        while (in.ready()) {
+            String line = in.readLine();
+            String[] split = line.split(" - - ");
+            String host = split[0];
+            
+            if(hash.get(host) == null) {
+                hash.put(host, 1);
+            } else {
+                int val = hash.get(host);
+                hash.put(host, val + 1);
+            }
+            
+            System.out.println(host);
+        }
+        
+        PrintWriter out = new PrintWriter(new FileWriter("records_" + filename));
+        Set set = hash.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry)iterator.next();
+            String host = String.valueOf(entry.getKey());
+            int numReq = (int)entry.getValue();
+            
+            out.println(host + " " + numReq);
+        }
+        out.close();
+    }
+}
+
+   //3 wrong, 2 performance
+   static long substringCalculator(String s) {
+                Map<String, Integer> substrings = new HashMap<String, Integer>();
+                long count = 0;
+     
+                for(int i = 0; i < s.length(); i++)
+                {
+                    String sub = s.substring(i);
+     
+                    for(int j = 0; j < sub.length(); j++)
+                    {
+                        String subDistinct = sub.substring(0, sub.length() - j);
+     
+                        if(!substrings.containsKey(subDistinct))
+                        {
+                            substrings.put(subDistinct, 1);
+                            //Console.WriteLine(subDistinct);
+                            count += 1;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+        
+        return count;
+    }
 
     ===================
 
@@ -533,6 +602,110 @@ public class LongestChain {
 41543 30461
 
 
+(A(B(D(E(G))))) (C(F)
+
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "GET /shuttle/countdown/ HTTP/1.0" 200 3985
+burger.letters.com - - [01/Jul/1995:00:00:11 -0400] "GET /shuttle/countdown/liftoff.html HTTP/1.0" 304 0
+burger.letters.com - - [01/Jul/1995:00:00:12 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 304 0
+burger.letters.com - - [01/Jul/1995:00:00:12 -0400] "GET /shuttle/countdown/video/livevideo.gif HTTP/1.0" 200 0
+d104.aa.net - - [01/Jul/1995:00:00:13 -0400] "GET /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /shuttle/countdown/count.gif HTTP/1.0" 200 40310
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 200 786
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /images/KSC-logosmall.gif HTTP/1.0" 200 1204
+d104.aa.net - - [01/Jul/1995:00:00:15 -0400] "GET /shuttle/countdown/count.gif HTTP/1.0" 200 40310
+d104.aa.net - - [01/Jul/1995:00:00:15 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 200 786
+
+burger.letters.com 3
+d104.aa.net 3
+unicomp6.unicomp.net 4
+
+my output:
+[Success] File "records_hosts_access_log_01.txt":
+
+alyssa.prodigy.com 1
+bart 1
+
+burger.letters.com 3
+
+d104.aa.net 4
+dave.dev1.ihub.com 4
+
+lmsmith.tezcat.com 1
+port2.electrotex.com 1
+gayle 1
+pm13.j51.com 1
+dial22.lloyd.com 1
+net 1
+
+dd14 2
+piweba3y.prodigy.com 2
+ppptky391.asahi 2
+gater4.sematech.org 2
+gater3.sematech.org 2
+scheyer.clark.net 2
+waters 2
+www 2
+slip1.yab.com 2
+
+
+dynip42.efn.org 3
+onyx.southwind.net 3
+
+
+
+
+remote27.compusmart.ab.ca 5
+smyth 5
+
+netport 6
+ix 6
+unicomp6.unicomp.net 6
+
+
+port26.annex2.nwlink.com 9
+ppp 9
+
+link097.txdirect.net 11
+
+=====
+expected:
+
+alyssa.prodigy.com 1
+bart-slip1.llnl.gov 1
+burger.letters.com 3
+d104.aa.net 4
+dave.dev1.ihub.com 4
+dd14-012.compuserve.com 1
+dd14-046.compuserve.com 1
+dial22.lloyd.com 1
+dynip42.efn.org 3
+gater3.sematech.org 2
+gater4.sematech.org 2
+gayle-gaston.tenet.edu 1
+ix-or10-06.ix.netcom.com 3
+ix-orl2-01.ix.netcom.com 3
+link097.txdirect.net 11
+lmsmith.tezcat.com 1
+net-1-141.eden.com 1
+netport-27.iu.net 6
+onyx.southwind.net 3
+piweba3y.prodigy.com 2
+pm13.j51.com 1
+port2.electrotex.com 1
+port26.annex2.nwlink.com 9
+ppp-mia-30.shadow.net 6
+ppp-nyc-3-1.ios.com 3
+ppptky391.asahi-net.or.jp 2
+remote27.compusmart.ab.ca 5
+scheyer.clark.net 2
+slip1.yab.com 2
+smyth-pc.moorecap.com 5
+unicomp6.unicomp.net 6
+waters-gw.starway.net.au 2
+www-a1.proxy.aol.com 1
+www-b4.proxy.aol.com 1
+
+
 jacky.rank1@gmail.com
 hacker.jack109@gmail.com --> high chance
 andy@dispostable.com
@@ -544,6 +717,7 @@ anonymous1@dispostable.com
 anonymous2@dispostable.com
 anonymous3@dispostable.com
 anonymous4@dispostable.com
+c1@dispostable.com
 
 dispostable@dispostable.com
 

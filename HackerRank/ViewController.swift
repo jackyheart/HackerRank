@@ -869,46 +869,45 @@ class ViewController: UIViewController {
         return res
     }
     
-    /*
-     func readComp() {
-     
-     let n = Int(readLine(strippingNewline: true)!)!
-     
-     for _ in 0 ..< n {
-     let metaArray = readLine(strippingNewline: true)!.characters.split {$0 == " "}.map (String.init)
-     let exp = Int(metaArray[0])
-     let numString = Int(metaArray[1])
-     
-     let stringArray = readLine(strippingNewline: true)!.characters.split {$0 == " "}.map (String.init)
-     var hash:[String:Int] = [:]
-     for s in stringArray {
-     let chars = Array(s).map { String($0) }
-     for c in chars {
-     if hash[c] == nil {
-     hash[c] = 0
-     } else {
-     hash[c]! += hash[c]! + 1
-     }
-     }
-     }
-     
-     var sum = 0
-     for key in hash.keys {
-     let times = hash[key]
-     let ascii = UInt8(ascii: key)
-     let p = pow(ascii, exp) * times
-     sum += p
-     }
-     
-     if sum % 2 == 0 {
-     print("EVEN")
-     } else {
-     print("ODD")
-     }
-     }
-     }
-     */
     
+    func oddStrings() {
+
+        let n = Int(readLine(strippingNewline: true)!)!
+     
+        for _ in 0 ..< n {
+            let metaArray = readLine(strippingNewline: true)!.characters.split {$0 == " "}.map (String.init)
+            let exp = Int(metaArray[0])
+            let numString = Int(metaArray[1])
+            
+            let stringArray = readLine(strippingNewline: true)!.characters.split {$0 == " "}.map (String.init)
+            var hash:[String:Int] = [:]
+            for s in stringArray {
+                let chars = Array(s).map { String($0) }
+                for c in chars {
+                    if hash[c] == nil {
+                        hash[c] = 0
+                    } else {
+                        hash[c]! += hash[c]! + 1
+                    }
+                }
+            }
+         
+             var sum = 0
+             for key in hash.keys {
+                let times = hash[key]
+                let ascii = UInt8(ascii: key)
+                let p = pow(ascii, exp) * times
+                sum += p
+             }
+         
+             if sum % 2 == 0 {
+                print("EVEN")
+             } else {
+                print("ODD")
+             }
+        }
+    }
+
     func readAscii() {
         let chars = ["a", "b", "c", "d", "e", "z", "A", "B", "Z"]
         
@@ -1203,63 +1202,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
-        return res
-    }
-    
-    func twins4(_ a: [String], _ b: [String]) -> [String] {
-        
-        var res:[String] = []
-        
-        for i in 0 ..< a.count {
-            let sA = a[i]
-            let sB = b[i]
-            
-            if sA.count != sB.count {
-                res.append("No")
-            } else {
-                if sA == sB {
-                    res.append("Yes")
-                } else {
-                    
-                    //var i = 0
-                    //var j = 0
-
-                    var charsA = Array(sA).map(String.init)
-                    let charsB = Array(sB).map(String.init)
-                    
-                    let n = charsA.count
-                    
-                    var isFound = false
-                    for i in 0 ..< n {
-                        //var cA = charsA[i]
-                        //let cB = charsB[i]
-                        
-                        var j = i + 2
-                        while j < n {
-                            if charsA[j] == charsB[i] {
-                                charsA.swapAt(i, j)
-                                break
-                            }
-                            j += 2
-                        }
-                        
-                        if charsA == charsB {
-                            isFound = true
-                            break
-                        }
-                    }
-                    
-                    if isFound {
-                        res.append("Yes")
-                    } else {
-                        res.append("No")
-                    }
-                }
-            }
-        }
-        
-        print(res)
         
         return res
     }
@@ -2100,6 +2042,30 @@ class ViewController: UIViewController {
         print(resStr)
         print("")
     }
+    
+    func substringCalculator(s: String) -> Int {
+        var hash:[String:Int] = [:]
+        var chars = Array(s).map(String.init)
+        let n = chars.count
+        var count = 0
+        
+        for i in 0 ..< n {
+            let sub = chars[i ..< n]
+            let nSub = sub.count
+            
+            for j in 0 ..< nSub {
+                let subDist = sub[0 ..< (nSub - j)].joined()
+                if hash[subDist] == nil {
+                    hash[subDist] = 1
+                    count += 1
+                } else {
+                    continue
+                }
+            }
+        }
+        
+        return count
+    }
 
     //====================================================================================================================================================================//
     
@@ -2119,6 +2085,64 @@ class ViewController: UIViewController {
         //debug:
         let binResStr = String(res, radix: 2)
         print("res num: \(res), res bin: \(binResStr)")
+        
+        return res
+    }
+    
+    //all passed ! (yewww !!)
+    func twins4(_ a: [String], _ b: [String]) -> [String] {
+        
+        var res:[String] = []
+        
+        for i in 0 ..< a.count {
+            let sA = a[i]
+            let sB = b[i]
+            
+            if sA.count != sB.count {
+                res.append("No")
+            } else {
+                if sA == sB {
+                    res.append("Yes")
+                } else {
+                    
+                    //var i = 0
+                    //var j = 0
+                    
+                    var charsA = Array(sA).map(String.init)
+                    let charsB = Array(sB).map(String.init)
+                    
+                    let n = charsA.count
+                    
+                    var isFound = false
+                    for i in 0 ..< n {
+                        //var cA = charsA[i]
+                        //let cB = charsB[i]
+                        
+                        var j = i + 2
+                        while j < n {
+                            if charsA[j] == charsB[i] {
+                                charsA.swapAt(i, j)
+                                break
+                            }
+                            j += 2
+                        }
+                        
+                        if charsA == charsB {
+                            isFound = true
+                            break
+                        }
+                    }
+                    
+                    if isFound {
+                        res.append("Yes")
+                    } else {
+                        res.append("No")
+                    }
+                }
+            }
+        }
+        
+        print(res)
         
         return res
     }
@@ -2209,7 +2233,8 @@ class ViewController: UIViewController {
     }
 
     //all passed !!! (Last Substring)
-    func countSubstring3() {
+    //timeout on (Substring calculator)
+    func countSubstring3() -> Int {
         let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
         var res:[String] = []
         let chars = Array(s).map { String($0) }
@@ -2234,6 +2259,8 @@ class ViewController: UIViewController {
         }
         
         print("res count (sub3): \(res.count)")
+        
+        return res.count
     }
     
     //all passed !!
