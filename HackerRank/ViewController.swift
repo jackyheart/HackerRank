@@ -14,6 +14,79 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+//        evaluateProblem()
+//        evaluateProblem2()
+//        evaluateProblem3()
+        
+        //easyStrings3()
+        
+        //substringCalculator()
+        //substringCalculator2()
+        //substringCalculator3()
+        //substringCalculator4()
+        //substringCalculator5()
+        
+        //correct
+//            maxPoints2([
+//                "0 0",
+//                "3 3",
+//                "2 3",
+//                "0 2",
+//                "2 0",
+//                "0 3"])
+        
+//        maxPoints2([
+//            "24331 11582",
+//            "40676 17095",
+//            "36278 30532",
+//            "41086 28684",
+//            "20917 27058",
+//            "12962 30532",
+//            "12962 27058",
+//            "12686 41706",
+//            "11904 36954",
+//            "36278 27058",
+//            "20917 30532",
+//            "28688 28593",
+//            "37112 27058",
+//            "18069 27058",
+//            "32436 27058",
+//            "37390 21596",
+//            "18069 30532",
+//            "27549 28756",
+//            "32436 30532",
+//            "37112 30532"])
+        
+        //correct
+        
+        maxPoints2([
+            "21121 19969",
+            "31885 37104",
+            "29984 30461",
+            "38734 30461",
+            "10024 30461",
+            "38734 19969",
+            "32008 30461",
+            "28517 19969",
+            "29984 19969",
+            "21121 30461",
+            "31300 19969",
+            "41543 30461",
+            "10024 19969",
+            "32009 19969",
+            "32008 19969",
+            "21560 26580",
+            "32009 30461",
+            "28517 30461",
+            "41543 19969",
+            "31300 30461"])
+ 
+//
+        
+        //        findSubstringWithStar()
+        //        findSubstringWithStar2()
+        //findSubstringWithStar3()
+    
         //solutionNumberComplement(5)
         //solutionEncodedString4("1(2)23(3)")
         //solutionEncodedString4("23#(2)24#25#26#23#(3)")
@@ -22,9 +95,6 @@ class ViewController: UIViewController {
         
         //twinString()
         //additionIncrement()
-        
-        //evaluateProblem()
-        //evaluateProblem2()
         //countSubstring3()
         
         //testSwap()
@@ -81,40 +151,19 @@ class ViewController: UIViewController {
         
         //twins4(["cdab", "dcba", "abcd"], ["abcd", "abcd", "abcdcd"])
         
-        /*
-        maxPoints([
-            "21121 19969",
-            "31885 37104",
-            "29984 30461",
-            "38734 30461",
-            "10024 30461",
-            "38734 19969",
-            "32008 30461",
-            "28517 19969",
-            "29984 19969",
-            "21121 30461",
-            "31300 19969",
-            "41543 30461",
-            "10024 19969",
-            "32009 19969",
-            "32008 19969",
-            "21560 26580",
-            "32009 30461",
-            "28517 30461",
-            "41543 19969",
-            "31300 30461"])
-        */
-        
         //maxSubsetSum([2, 4])
         
         //finalPrice(prices: [1, 3, 3, 2, 5])
         
         //alphabetCyclicIncrement([5, 10, 3, 6], ["abcde", "abcdeabcde", "yzz", "apapap"])
         
-        getSequenceSum(0, 5, -1)
-        getSequenceSum(-5, -1, -3)
-        getSequenceSum(1, 5, 2)
+//        getSequenceSum(0, 5, -1)
+//        getSequenceSum(-5, -1, -3)
+//        getSequenceSum(1, 5, 2)
         //getSequenceSum(0, 5, 1)
+        
+        //stringPermutationAlphabetically()
+         //permuteLoop(3, ["a", "b", "c"])
     }
 
     override func didReceiveMemoryWarning() {
@@ -892,6 +941,7 @@ class ViewController: UIViewController {
                 }
             }
          
+            /*
              var sum = 0
              for key in hash.keys {
                 let times = hash[key]
@@ -905,6 +955,7 @@ class ViewController: UIViewController {
              } else {
                 print("ODD")
              }
+            */
         }
     }
 
@@ -1368,6 +1419,8 @@ class ViewController: UIViewController {
                 i += 1
             }
         }
+        
+        //print(A)
     }
     
     //== End test...
@@ -1860,7 +1913,15 @@ class ViewController: UIViewController {
      0 2
      2 0
      0 3
-     
+
+     sorted:
+     0 0
+     0 2
+     0 3
+     2 0
+     2 3
+     3 3
+
      exp: 2
      
      24331 11582
@@ -1883,6 +1944,28 @@ class ViewController: UIViewController {
      27549 28756
      32436 30532
      37112 30532
+     
+     sorted:
+     11904 36954
+     12686 41706
+     12962 27058
+     12962 30532
+     18069 27058
+     18069 30532
+     20917 27058
+     20917 30532
+     24331 11582
+     27549 28756
+     28688 28593
+     32436 27058
+     32436 30532
+     36278 27058
+     36278 30532
+     37112 27058
+     37112 30532
+     37390 21596
+     40676 17095
+     41086 28684
      
      exp 6
      
@@ -1907,7 +1990,7 @@ class ViewController: UIViewController {
      41543 19969
      31300 30461
      
-     exp 6
+     exp 9
      */
     struct Point {
         var x = 0
@@ -1982,11 +2065,129 @@ class ViewController: UIViewController {
                             isYMode = true
                         }
                     }
+                } else {
+                    if isYMode {
+                        let lastYPoint = yArr.last!
+                        
+                        if lastYPoint.x != p.x && lastYPoint.y == p.y {
+                            yArr.append(p)
+                            isYMode = false
+                        }
+                    }
                 }
             }
         }
         
         return yArr.count
+    }
+    
+    /*
+     sorted:
+     10024 19969
+     10024 30461
+     21121 19969
+     21121 30461
+     21560 26580
+     28517 19969
+     28517 30461
+     29984 19969
+     29984 30461
+     31300 19969
+     31300 30461
+     31885 37104
+     32008 19969
+     32008 30461
+     32009 19969
+     32009 30461
+     38734 19969
+     38734 30461
+     41543 19969
+     41543 30461
+
+     sorted:
+     0 0
+     0 2
+     0 3
+     2 0
+     2 3
+     3 3
+     
+     sorted:
+     11904 36954
+     12686 41706
+     12962 27058
+     12962 30532
+     18069 27058
+     18069 30532
+     20917 27058
+     20917 30532
+     24331 11582
+     27549 28756
+     28688 28593
+     32436 27058
+     32436 30532
+     36278 27058
+     36278 30532
+     37112 27058
+     37112 30532
+     37390 21596
+     40676 17095
+     41086 28684
+     */
+
+    //tbc
+    func maxPoints2(_ points: [String]) -> Int {
+        
+        //scan, and consider invalid points at the beginnings
+        
+        var res:[Point] = []
+        
+        for pStr in points {
+            let pArr = pStr.split(separator: " ").map(String.init)
+            let point = Point(Int(pArr[0])!, Int(pArr[1])!)
+            res.append(point)
+        }
+        
+        let sorted = res.sorted(by: {
+            if $0.x == $1.x {
+                return $0.y < $1.y
+            }
+            return $0.x < $1.x
+        })
+        
+        //debug:
+        for s in sorted {
+            print("\(s.x) \(s.y)")
+        }
+    
+        let n = sorted.count
+        
+        var i = 0
+        var count = 0
+        
+        while i + 2 < n {
+            let p0 = sorted[i]
+            let p1 = sorted[i+1]
+            let p2 = sorted[i+2]
+            
+            if p0.x == p1.x && p2.x > p1.x {
+                count += 1
+                i += 2
+            } else {
+                i += 1
+            }
+        }
+        
+        if i + 1 == (n - 1) {
+            let p0 = sorted[i]
+            let p1 = sorted[i+1]
+            
+            if p0.x == p1.x {
+                count += 1
+            }
+        }
+        
+        return count
     }
     
     /*
@@ -2071,7 +2272,10 @@ class ViewController: UIViewController {
      res: 2
      */
     
-    func easyStrings(_ a: String, _ b: String) -> Int {
+    func easyStrings() -> Int {
+        
+        let a = "wszauoffphsyyyrvcfsewdrdwpocydurpzvsmfzcpiwwvhrjvwfsresfbckiubyhkulwigowqggznidxleylyqhwms"
+        let b = "qagrsoehismggrurufqzlckfzwwwoslrvuuhpesyvcrcixyozpbjkfhywzbvpynilmcyhdywiwwvdfswdefwpfyssd"
         
         var count = 0
         
@@ -2108,7 +2312,12 @@ class ViewController: UIViewController {
         return count
     }
     
-    func easyStrings2(_ a: String, _ b: String) -> Int {
+    //https://stackoverflow.com/questions/18491591/finding-minimum-moves-required-for-making-2-strings-equal
+    //https://www.careercup.com/question?id=5100378148306944
+    func easyStrings2() -> Int {
+        
+        let a = "wszauoffphsyyyrvcfsewdrdwpocydurpzvsmfzcpiwwvhrjvwfsresfbckiubyhkulwigowqggznidxleylyqhwms"
+        let b = "qagrsoehismggrurufqzlckfzwwwoslrvuuhpesyvcrcixyozpbjkfhywzbvpynilmcyhdywiwwvdfswdefwpfyssd"
         
         var count = 0
         
@@ -2135,6 +2344,59 @@ class ViewController: UIViewController {
                     count += 1
                 } else {
                     i = -1 //reset
+                }
+            }
+            
+            i += 1
+        }
+        
+        return count
+    }
+    
+    func easyStrings3() -> Int {
+
+//        let a = "aaaaaaaaab"
+//        let b = "abaaaaaaaa"
+        
+        let a = "wszauoffphsyyyrvcfsewdrdwpocydurpzvsmfzcpiwwvhrjvwfsresfbckiubyhkulwigowqggznidxleylyqhwms"
+        let b = "qagrsoehismggrurufqzlckfzwwwoslrvuuhpesyvcrcixyozpbjkfhywzbvpynilmcyhdywiwwvdfswdefwpfyssd"
+        
+        var count = 0
+        
+        var charsA = Array(a).map(String.init)
+        var charsB = Array(b).map(String.init)
+        
+        let nA = charsA.count
+        let nB = charsB.count
+        
+        if charsA.first == charsB.last {
+            //swap first and last
+            charsA.swapAt(0, nA - 1)
+            count += 1
+        }
+        
+        var i = 0
+        while charsA != charsB {
+            let cA = charsA[i]
+            let cB = charsB[i]
+            
+            if cA != cB {
+                if i + 1 < nA {
+                    charsA.swapAt(i, i+1)
+                    count += 1
+                } else {
+                    i = 0 //reset
+                }
+            }
+            
+            if charsA != charsB {
+                if cA != cB {
+                    if i + 1 < nB {
+                        charsB.swapAt(i, i+1)
+                        count += 1
+                    } else {
+                        i = 0 //reset
+                    }
                 }
             }
             
@@ -2206,20 +2468,25 @@ class ViewController: UIViewController {
         print("")
     }
     
-    func substringCalculator(s: String) -> Int {
+    func substringCalculator() -> Int {
+        
+        //let s = "kincenvizh"
+        
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        
         var hash:[String:Int] = [:]
         var chars = Array(s).map(String.init)
         let n = chars.count
         var count = 0
         
         for i in 0 ..< n {
-            let sub = chars[i ..< n]
+            let sub = Array(chars[i ..< n])
             let nSub = sub.count
             
             for j in 0 ..< nSub {
-                let subDist = sub[0 ..< (nSub - j)].joined()
-                if hash[subDist] == nil {
-                    hash[subDist] = 1
+                let subDistinct = sub[0 ..< (nSub - j)].joined()
+                if hash[subDistinct] == nil {
+                    hash[subDistinct] = 1
                     count += 1
                 } else {
                     continue
@@ -2230,16 +2497,73 @@ class ViewController: UIViewController {
         return count
     }
     
+    //timeout on substring calculator
     func substringCalculator2() -> Int {
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        var res:[String] = []
+        let chars = Array(s).map { String($0) }
+        let n = s.count
+        var hash:[String:Bool] = [:]
+        
+        var reduce = 0
+        var x = 1
+        for i in 0 ..< n {
+            for j in 0 ..< n - reduce {
+                let end = n - j
+                let sub = chars[i ..< end].joined()
+                if hash[sub] == nil {
+                    hash[sub] = true
+                    //print("\(x): \(sub)")
+                    res.append(sub)
+                    x += 1
+                }
+            }
+            
+            reduce += 1
+        }
+        
+        print("res count (substringCalculator2): \(res.count)")
+        
+        return res.count
+    }
+    
+    func substringCalculator3() -> Int {
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        var res:Set<String> = []
+        
+        let chars = Array(s).map { String($0) }
+        let n = s.count
+     
+        var reduce = 0
+        for i in 0 ..< n {
+            for j in 0 ..< n - reduce {
+                let end = n - j
+                let sub = chars[i ..< end].joined()
+                res.insert(sub)
+            }
+            reduce += 1
+        }
+        
+        print("res count (substringCalculator3): \(res.count)")
+        
+        return res.count
+    }
+    
+    func substringCalculator4() -> Int {
+        
+        //using count
         
         //expected: 499011
         
-        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        //total: 500,500
+        //diff to expected: 1489
         
-        //let s = "kincenvizh"
+//        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
         
-        let chars = Array(s.characters).map { String($0) }
-        let n = s.characters.count
+       let s = "kincenvizhvizh"
+        
+        let chars = Array(s).map { String($0) }
+        let n = s.count
         var hash:[String:Int] = [:]
         
         for i in 0 ..< n {
@@ -2247,22 +2571,144 @@ class ViewController: UIViewController {
             let c = chars[i]
             
             if hash[c] == nil {
-                hash[c] = 1
+                hash[c] = 0
             } else {
                 hash[c]! += 1
             }
+            
+            let end = n - i
+            if i < end {
+                let sub = chars[i ..< end].joined()
+                if hash[sub] == nil {
+                    hash[sub] = 0
+                } else {
+                    hash[sub]! += 1
+                }
+            }
         }
         
-        let duplicates = hash.filter({ $0.value > 1 })
-        let dupSum = duplicates.reduce(0) { $0 + ($1.value - 1) }
+        let duplicates = hash.filter({ $0.value > 0 })
+        let dupSum = duplicates.reduce(0) { $0 + ($1.value) }
+        
+        //debug
+        var count = 0
+        for key in duplicates.keys {
+            count += hash[key]!
+        }
+        
+        let hashPrint = hash.sorted(by: { $0.value > $1.value }).map({ "\($0.key): \($0.value)\n" }).joined()
+        print(hashPrint)
+        print("count: \(count)")
+        print("dupSum: \(dupSum)")
         
         let sum = (n * (n + 1)) / 2
         let total = sum - dupSum
         
         print("total: \(total)")
+        //my res: 499526, expected: 499011
+        //diff: 515
+        
         //still wrong
         
         return total
+    }
+    
+    func substringCalculator5() -> Int {
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        var res:Set<String> = []
+        
+        let chars = Array(s).map { String($0) }
+        let n = s.count
+        
+        //loop once
+        for i in 0 ..< n {
+            let end = n - i
+            let sub = chars[0 ..< end].joined()
+            res.insert(sub)
+        }
+        
+        var reduce = 1
+        for i in 1 ..< n {
+            for j in 0 ..< n - reduce {
+                let end = n - j
+                let sub = chars[i ..< end].joined()
+                res.insert(sub)
+            }
+            reduce += 1
+        }
+        
+        print("res count (substringCalculator5): \(res.count)")
+        
+        return res.count
+    }
+    
+    //====
+    
+    func stringSubstringAlphabetically(_ s:String) -> [String] {
+        
+        var res:Set<String> = []
+        
+        let chars = Array(s).map(String.init)
+        let n = chars.count
+        
+        res.insert(s)
+        
+        for i in 0 ..< n - 1 {
+            
+            let charI = chars[i]
+            res.insert(charI)
+            
+            for j in i+1 ..< n {
+                
+                let charJ = chars[j]
+                
+                res.insert(charJ)
+                res.insert("\(charI)\(charJ)")
+            }
+        }
+        
+        let sorted = res.sorted()
+        
+        //print(sorted)
+        
+        return sorted
+    }
+    
+    func stringPermutationAlphabeticallySwap(_ s:String) -> [String] {
+        
+        let n = s.count
+        
+        let chars = Array(s).map(String.init)
+        
+        var c = [Int].init(repeating: 0, count: n)
+        var A = chars
+        
+        var res:[String] = []
+        
+        var i = 0
+        while i < n {
+            if c[i] < i {
+                if i % 2 == 0 {
+                    A.swapAt(0, i)
+                } else {
+                    A.swapAt(c[i], i)
+                }
+                
+                res.append(A.joined())
+                
+                c[i] += 1
+                i = 0
+            }
+            else {
+                c[i] = 0
+                i += 1
+            }
+        }
+        
+        let sorted = res.sorted()
+        //print(sorted)
+        
+        return sorted
     }
 
     //====================================================================================================================================================================//
@@ -2709,13 +3155,161 @@ class ViewController: UIViewController {
         return res
     }
     
+    func matches(for regex: String, in text: String) -> [String] {
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+            return results.map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    func findSubstringWithStar() -> Int {
+        
+        //let s = "xabcdey"
+        //let x = "ab***de"
+        
+//        let s = "juliasamanthantjulia"
+//        let x = "ant"
+        
+//        let s = "juliasamanthasamanthajulia"
+//        let x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        let x = "ant*as"
+        
+        var startIdx = -1
+        
+        let xArr = x.split(separator: "*").map(String.init)
+        if xArr.count == 2 {
+            let left = xArr[0]
+            let right = xArr[1]
+            
+            let resArr = matches(for: "\(left).\(right)", in: s)
+            if resArr.count == 1 {
+                let res = resArr[0]
+                if let range = s.range(of: res) {
+                    startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+                }
+            }
+            
+        } else if xArr.count == 1 {
+            if let range = s.range(of: x) {
+                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+            }
+        }
+        
+        print("startIdx: \(startIdx)")
+        
+        return startIdx
+    }
+    
+    func findSubstringWithStar2() -> Int {
+        
+        //this is faster than findSubstringWithStar()
+        
+        //let s = "xabcdey"
+        //var x = "ab*de"
+        
+//        let s = "juliasamanthantjulia"
+//        var x = "ant"
+        
+//        let s = "juliasamanthasamanthajulia"
+//        var x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        var x = "ant*as"
+        
+        var startIdx = -1
+        
+        let xArr = x.split(separator: "*").map(String.init)
+        if xArr.count == 2 {
+            
+            x = x.replacingOccurrences(of: "*", with: ".")
+            
+            let resArr = matches(for: x, in: s)
+            if resArr.count == 1 {
+                let res = resArr[0]
+                if let range = s.range(of: res) {
+                    startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+                }
+            }
+        } else if xArr.count == 1 {
+            if let range = s.range(of: x) {
+                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+            }
+        }
+        
+        return startIdx
+    }
+    
+    func findSubstringWithStar3() -> Int {
+        
+        //faster than findSubstringWithStar2()
+        
+        //let s = "xabcdey"
+        //var x = "ab*de"
+        
+        //        let s = "juliasamanthantjulia"
+        //        var x = "ant"
+        
+//                let s = "juliasamanthasamanthajulia"
+//                var x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        var x = "ant*as"
+        
+        var startIdx = -1
+        
+        x = x.replacingOccurrences(of: "*", with: ".")
+        
+        let resArr = matches(for: x, in: s)
+        if resArr.count == 1 {
+            let res = resArr[0]
+            if let range = s.range(of: res) {
+                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+            }
+        }
+        
+        return startIdx
+    }
+    
+    func findSubstringWithStar4() -> Int {
+        
+        //faster than findSubstringWithStar3()
+        //fastest of all !
+        
+//        let s = "juliasamanthasamanthajulia"
+//        var x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        var x = "ant*as"
+        
+        x = x.replacingOccurrences(of: "*", with: ".")
+        
+        var startIdx = -1
+        
+        if let range = s.range(of: x, options: .regularExpression) {
+            startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+        }
+        
+        return startIdx
+    }
+
     //============================
 
     // Performance
     func evaluateProblem()
     {
         let start = DispatchTime.now() // <<<<<<<<<< Start time
-        permuteRec(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
+        //permuteRec(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
+        findSubstringWithStar2()
         let end = DispatchTime.now()   // <<<<<<<<<<   end time
         
         let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
@@ -2727,12 +3321,26 @@ class ViewController: UIViewController {
     func evaluateProblem2()
     {
         let start = DispatchTime.now() // <<<<<<<<<< Start time
-        permuteLoop(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
+        //permuteLoop(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
+        findSubstringWithStar3()
         let end = DispatchTime.now()   // <<<<<<<<<<   end time
         
         let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
         let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
         
         print("Time to evaluate problem (2): \(timeInterval) seconds")
+    }
+    
+    func evaluateProblem3()
+    {
+        let start = DispatchTime.now() // <<<<<<<<<< Start time
+        //permuteLoop(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
+        findSubstringWithStar4()
+        let end = DispatchTime.now()   // <<<<<<<<<<   end time
+        
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
+        let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
+        
+        print("Time to evaluate problem (3): \(timeInterval) seconds")
     }
 }

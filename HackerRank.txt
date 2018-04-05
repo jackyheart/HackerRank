@@ -442,7 +442,6 @@ public class Solution {
                         if(!substrings.containsKey(subDistinct))
                         {
                             substrings.put(subDistinct, 1);
-                            //Console.WriteLine(subDistinct);
                             count += 1;
                         }
                         else
