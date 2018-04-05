@@ -1446,7 +1446,7 @@ class ViewController: UIViewController {
         return isFound
     }
     
-    //4/11
+    //4/11, 3 wrongs, 4 timeout
     func checkDivisibility(arr: [String]) -> [String] {
         
         var res:[String] = []
@@ -3017,11 +3017,13 @@ class ViewController: UIViewController {
     
     /*
      101101101 -> 3
-     1111101 -> 1
+     1111101 -> 1 --> cannot split further
      0000 -> -1
      */
     
     func powerOfFive() -> Int {
+        
+        //wrong solution !
         
         let s = "0000"
         var count = 0
