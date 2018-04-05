@@ -583,6 +583,23 @@ public class LongestChain {
     }
 }
 
+int main(void) {
+    int tests[] = { 1, 5, 10, 25, 100, 125, 250, 625, 1000 };
+    int num_tests = sizeof(tests) / sizeof(tests[0]);
+    int i;
+ 
+    for (i = 0; i < num_tests; ++i)
+    {
+        int x = tests[i];
+        int n = (int)(log(x) / log(5)); // get n = log5(x), truncated to integer
+        if (pow(5, n) == x)         // test to see whether x == 5^n
+            printf("%d is a power of 5\n", x);
+        else
+            printf("%d is not a power of 5\n", x);
+    }
+    return 0;
+}
+
 10024 19969
 10024 30461
 

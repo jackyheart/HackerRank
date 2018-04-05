@@ -18,7 +18,8 @@ class ViewController: UIViewController {
 //        evaluateProblem2()
 //        evaluateProblem3()
         
-        isValidCoordinate()
+        //isValidCoordinate()
+        powerOfFive()
         
         //easyStrings3()
         
@@ -3031,6 +3032,60 @@ class ViewController: UIViewController {
                 print("")
             }
         }
+    }
+    
+    //magical binary
+    /*
+     input:
+     11011000
+     
+     swap 10 and 1100 becomes
+     11100100
+     
+     output:
+     11100100
+     */
+    func largestMagical(binString: String) -> String {
+        
+        return ""
+    }
+    
+    /*
+     101101101 -> 3
+     1111101 -> 1
+     0000 -> -1
+     */
+    
+    func powerOfFive() -> Int {
+        
+        let s = "0000"
+        var count = 0
+        
+        let splits1 = s.components(separatedBy: "101")
+        count += (splits1.count-1)
+        
+        let splits2 = s.components(separatedBy: "1001")
+        count += (splits2.count-1)
+        
+        let splits3 = s.components(separatedBy: "10001")
+        count += (splits3.count-1)
+        
+        let splits4 = s.components(separatedBy: "100001")
+        count += (splits4.count-1)
+        
+        let splits5 = s.components(separatedBy: "1000001")
+        count += (splits5.count-1)
+        
+        if count == 0 {
+            count = -1
+        }
+        
+        return count
+    }
+    
+    func maximumTwo() -> [Int] {
+        
+        return []
     }
     
     //                                                              PASSED SECTION !!!
