@@ -551,56 +551,6 @@ class ViewController: UIViewController {
         print("")
     }
     
-    //tbc
-    func getSequenceSum(_ i: Int, _ j: Int, _ k: Int) -> Int {
-     
-        //sum 1st part
-        let sumJ = ((j * (j + 1)) / 2)
-        let sumI = ((i-1) * ((i-1) + 1)) / 2
-        let sumPos = sumJ - sumI
-        
-        //debug
-        print("(\(i), \(j), \(k)):")
-        
-        //sum 2nd part
-        var toAdd = 0
-        if 0 < j && 0 > k {
-            //j+k
-            let j0 = j - 1
-            let sumJ0 = ((j0 * (j0 + 1)) / 2)
-            
-            let k0 = abs(k)
-            let sumK0 = ((k0 * (k0 + 1)) / 2) * -1
-            
-            toAdd = sumJ0 + sumK0
-        } else if j > 0 && k > 0 {
-            //j - k
-            let j0 = j - 1
-            let sumJ0 = ((j0 * (j0 + 1)) / 2)
-            
-            let k0 = k - 1
-            let sumK0 = ((k0 * (k0 + 1)) / 2)
-            
-            toAdd = sumJ0 - sumK0
-        } else if j < 0 && k < 0 {
-            //k - j
-            let j0 = abs(j)
-            let sumJ0 = ((j0 * (j0 + 1)) / 2) * -1
-            
-            let k0 = abs(k)
-            let sumK0 = ((k0 * (k0 + 1)) / 2) * -1
-            
-            toAdd = sumK0 - sumJ0
-        }
-        
-        let res = sumPos + toAdd
-        
-        //debug
-        print(res)
-        
-        return res
-    }
-    
     //fail
     func missingWords(s: String, t: String) -> [String] {
         var fullS = s.characters.split{$0 == " "}.map(String.init)
@@ -2469,7 +2419,7 @@ class ViewController: UIViewController {
         }
         
         print(resStr)
-        print("")
+        //print("")
     }
     
     func substringCalculator() -> Int {
@@ -3099,9 +3049,186 @@ class ViewController: UIViewController {
         return []
     }
     
+    /*
+     * For the unweighted graph, {name}:
+     * 1. The number of nodes is {name}Nodes.
+     * 2. The number of edges is {name}Edges.
+     * 3. An edge exists between {name}From[i] and {name}To[i].
+     */
+    
+    /*
+     1 2
+     1 3
+     2 3
+     2 4
+     3 4
+     4 5
+     
+     two cycles:
+     1. (1, 2, 3): 0 + 1 + 1 = 2
+     2. (2, 3, 4): 1 + 1 + 1 = 3
+     return 2
+     
+     2 1
+     3 6
+     5 1
+     1 7
+     
+     return: -1
+     */
+    
+    class FriendNode {
+        var val = 0
+        var friends:[FriendNode] = []
+        
+        init(_ v:Int) {
+            val = v
+        }
+    }
+    
+    //8/14 wrong answers.... :(
+    func bestTrio() -> Int {
+        
+        //        let friendsFrom = [1, 1, 2, 2, 3, 4]
+        //        let friendsTo = [2, 3, 3, 4, 4, 5]
+        
+        let friendsFrom = [2, 3, 5, 1]
+        let friendsTo = [1, 6, 1, 7]
+        
+        let n = friendsFrom.count
+        var res:[FriendNode] = []
+        var cycles:[String] = []
+        
+        for i in 0 ..< n {
+            let fromVal = friendsFrom[i]
+            let toVal = friendsTo[i]
+            
+            var fromNode:FriendNode? = nil
+            var toNode:FriendNode? = nil
+            
+            if let idxFrom = res.index(where: { $0.val == fromVal }) {
+                fromNode = res[idxFrom]
+                
+                if let idxTo = res.index(where: { $0.val == toVal }) {
+                    toNode = res[idxTo]
+                    
+                    if let fromNode = fromNode, let toNode = toNode {
+                        let setFromFriends = Set<Int>(fromNode.friends.map({ $0.val }))
+                        let setToFriends = Set<Int>(toNode.friends.map({ $0.val }))
+                        
+                        let resArr = Array(setFromFriends.intersection(setToFriends))
+                        for r in resArr {
+                            cycles.append("\(fromNode.val),\(toNode.val),\(r)")
+                        }
+                    }
+                    
+                } else {
+                    toNode = FriendNode(toVal)
+                }
+                
+            } else {
+                fromNode = FriendNode(fromVal)
+                toNode = FriendNode(toVal)
+            }
+            
+            if let fromNode = fromNode, let toNode = toNode {
+                
+                fromNode.friends.append(toNode)
+                toNode.friends.append(fromNode)
+                
+                if !res.contains(where: { $0.val == fromVal }) {
+                    res.append(fromNode)
+                }
+                
+                if !res.contains(where: { $0.val == toVal }) {
+                    res.append(toNode)
+                }
+            }
+        }
+        
+        var minSum = Int.max
+        
+        for cyc in cycles {
+            let splits = cyc.components(separatedBy: ",").map({ Int($0)! })
+            let filters = res.filter({ splits.contains($0.val) })
+            
+            let setSplits = Set<Int>(splits)
+            
+            var sum = 0
+            for f in filters {
+                let friendsVal = f.friends.map({ $0.val })
+                var setFriends = Set<Int>(friendsVal)
+                setFriends.insert(f.val)//includes itself !
+                
+                let diffs = setSplits.symmetricDifference(setFriends)
+                sum += diffs.count
+            }
+            
+            if sum < minSum {
+                minSum = sum
+            }
+        }
+        
+        if cycles.isEmpty {
+            return -1
+        }
+        
+        return minSum
+    }
+    
     //                                                              PASSED SECTION !!!
 
     //====================================================================================================================================================================//
+    
+    //all passed !
+    func getSequenceSum(_ i: Int, _ j: Int, _ k: Int) -> Int {
+        
+        //sum 1st part
+        let sumJ = ((j * (j + 1)) / 2)
+        let sumI = ((i-1) * ((i-1) + 1)) / 2
+        let sumPos = sumJ - sumI
+        
+        //debug
+        print("(\(i), \(j), \(k)):")
+        
+        //sum 2nd part
+        var toAdd = 0
+        if 0 < j && 0 > k {
+            //j+k
+            let j0 = j - 1
+            let sumJ0 = ((j0 * (j0 + 1)) / 2)
+            
+            let k0 = abs(k)
+            let sumK0 = ((k0 * (k0 + 1)) / 2) * -1
+            
+            toAdd = sumJ0 + sumK0
+        } else if j > 0 && k > 0 {
+            //j - k
+            let j0 = j - 1
+            let sumJ0 = ((j0 * (j0 + 1)) / 2)
+            
+            let k0 = k - 1
+            let sumK0 = ((k0 * (k0 + 1)) / 2)
+            
+            toAdd = sumJ0 - sumK0
+        } else if j < 0 && k < 0 {
+            //k - j
+            let j0 = abs(j)
+            let sumJ0 = ((j0 * (j0 + 1)) / 2) * -1
+            
+            let k0 = abs(k)
+            let sumK0 = ((k0 * (k0 + 1)) / 2) * -1
+            
+            toAdd = sumK0 - sumJ0
+        }
+        
+        let res = sumPos + toAdd
+        
+        //debug
+        print(res)
+        
+        return res
+    }
     
     //to be confirmed !
     func numComplement(_ n:Int) -> Int {
@@ -3318,6 +3445,36 @@ class ViewController: UIViewController {
         print("res count (sub3): \(res.count)")
         
         return res.count
+    }
+    
+    //all passed
+    func lastSubString(s: String) -> String {
+        
+        var res:[String] = []
+        let chars = Array(s).map { String($0) }
+        let n = s.count
+        var hash:[String:Bool] = [:]
+        
+        var reduce = 0
+        var x = 1
+        for i in 0 ..< n {
+            for j in 0 ..< n - reduce {
+                let end = n - j
+                let sub = chars[i ..< end].joined()
+                if hash[sub] == nil {
+                    hash[sub] = true
+                    //print("\(x): \(sub)")
+                    res.append(sub)
+                    x += 1
+                }
+            }
+            
+            reduce += 1
+        }
+        
+        let sorted = res.sorted()
+        
+        return sorted.last!
     }
     
     //all passed !!
