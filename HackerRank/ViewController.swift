@@ -18,10 +18,13 @@ class ViewController: UIViewController {
 //        evaluateProblem2()
 //        evaluateProblem3()
         
+        isValidCoordinate()
+        
         //easyStrings3()
         
         //substringCalculator()
         //substringCalculator2()
+        //substringCalculator2a()
         //substringCalculator3()
         //substringCalculator4()
         //substringCalculator5()
@@ -58,28 +61,27 @@ class ViewController: UIViewController {
 //            "37112 30532"])
         
         //correct
-        
-        maxPoints2([
-            "21121 19969",
-            "31885 37104",
-            "29984 30461",
-            "38734 30461",
-            "10024 30461",
-            "38734 19969",
-            "32008 30461",
-            "28517 19969",
-            "29984 19969",
-            "21121 30461",
-            "31300 19969",
-            "41543 30461",
-            "10024 19969",
-            "32009 19969",
-            "32008 19969",
-            "21560 26580",
-            "32009 30461",
-            "28517 30461",
-            "41543 19969",
-            "31300 30461"])
+//        maxPoints2([
+//            "21121 19969",
+//            "31885 37104",
+//            "29984 30461",
+//            "38734 30461",
+//            "10024 30461",
+//            "38734 19969",
+//            "32008 30461",
+//            "28517 19969",
+//            "29984 19969",
+//            "21121 30461",
+//            "31300 19969",
+//            "41543 30461",
+//            "10024 19969",
+//            "32009 19969",
+//            "32008 19969",
+//            "21560 26580",
+//            "32009 30461",
+//            "28517 30461",
+//            "41543 19969",
+//            "31300 30461"])
  
 //
         
@@ -2136,6 +2138,7 @@ class ViewController: UIViewController {
      */
 
     //tbc
+    //3 / 10
     func maxPoints2(_ points: [String]) -> Int {
         
         //scan, and consider invalid points at the beginnings
@@ -2499,11 +2502,22 @@ class ViewController: UIViewController {
     
     //timeout on substring calculator
     func substringCalculator2() -> Int {
-        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        
+        //using double loop
+        
+//        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        
+        let s = "kincenvizhvizh"
+        
         var res:[String] = []
         let chars = Array(s).map { String($0) }
         let n = s.count
-        var hash:[String:Bool] = [:]
+        var hash:[String:Int] = [:]
+        
+        //debug
+        print("s len: \(s.count)")
+        print("chars count: \(chars.count)")
+        print("")
         
         var reduce = 0
         var x = 1
@@ -2512,9 +2526,81 @@ class ViewController: UIViewController {
                 let end = n - j
                 let sub = chars[i ..< end].joined()
                 if hash[sub] == nil {
-                    hash[sub] = true
-                    //print("\(x): \(sub)")
+                    hash[sub] = 0
+                    print("\(x): \(sub)")
                     res.append(sub)
+                    x += 1
+                } else {
+                    hash[sub]! += 1
+                    
+                    //debug
+                    print("\(x): \(sub)(duplicate, not added)")
+                }
+            }
+            
+            reduce += 1
+        }
+        
+        //debug
+        print("")
+        let hashPrint = hash.sorted(by: { $0.value > $1.value }).map({ "\($0.key): \($0.value)\n" }).joined()
+        print(hashPrint)
+        print("res count (substringCalculator2a): \(res.count)")
+        
+        return res.count
+    }
+    
+    //timeout on substring calculator
+    func substringCalculator2a() -> Int {
+        
+        //using double loop
+        //use Set for hash
+        //use hash for counting alphabet occurences
+        
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        
+        //let s = "kincenvizhvizh"
+        
+        var res:Set<String> = []
+        let chars = Array(s).map { String($0) }
+        let n = s.count
+        var hash:[String:Int] = [:]
+        
+        //debug
+        print("s len: \(s.count)")
+        print("chars count: \(chars.count)")
+        print("")
+        
+        //loop chars
+        for c in chars {
+            if hash[c] == nil {
+                hash[c] = 0
+            } else {
+                hash[c]! += 1
+            }
+        }
+        
+        //debug
+        let hashPrint = hash.sorted(by: { $0.value > $1.value }).map({ "\($0.key): \($0.value)\n" }).joined()
+        print(hashPrint)
+        
+        let duplicates = hash.filter({ $0.value > 0 })
+        let dupSum = duplicates.reduce(0) { $0 + ($1.value) }
+        print("dupSum: \(dupSum)")
+        
+        
+        var reduce = 0
+        var x = 1
+        for i in 0 ..< n {
+            for j in 0 ..< n - reduce {
+                let end = n - j
+                let sub = chars[i ..< end].joined()
+                
+                if res.contains(sub) {
+                    print("\(x): \(sub)(duplicate, not added)")
+                } else {
+                    print("\(x): \(sub)")
+                    res.insert(sub)
                     x += 1
                 }
             }
@@ -2522,12 +2608,17 @@ class ViewController: UIViewController {
             reduce += 1
         }
         
+        //debug
+        print("")
         print("res count (substringCalculator2): \(res.count)")
         
         return res.count
     }
     
     func substringCalculator3() -> Int {
+        
+        //using Set
+        
         let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
         var res:Set<String> = []
         
@@ -2644,6 +2735,8 @@ class ViewController: UIViewController {
     
     //====
     
+    //build the subsequences
+    //2/8
     func stringSubstringAlphabetically(_ s:String) -> [String] {
         
         var res:Set<String> = []
@@ -2710,11 +2803,239 @@ class ViewController: UIViewController {
         
         return sorted
     }
+    
+    func matches(for regex: String, in text: String) -> [String] {
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+            return results.map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    func findSubstringWithStar() -> Int {
+        
+        //let s = "xabcdey"
+        //let x = "ab***de"
+        
+        //        let s = "juliasamanthantjulia"
+        //        let x = "ant"
+        
+        //        let s = "juliasamanthasamanthajulia"
+        //        let x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        let x = "ant*as"
+        
+        var startIdx = -1
+        
+        let xArr = x.split(separator: "*").map(String.init)
+        if xArr.count == 2 {
+            let left = xArr[0]
+            let right = xArr[1]
+            
+            let resArr = matches(for: "\(left).\(right)", in: s)
+            if resArr.count == 1 {
+                let res = resArr[0]
+                if let range = s.range(of: res) {
+                    startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+                }
+            }
+            
+        } else if xArr.count == 1 {
+            if let range = s.range(of: x) {
+                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+            }
+        }
+        
+        print("startIdx: \(startIdx)")
+        
+        return startIdx
+    }
+    
+    func findSubstringWithStar2() -> Int {
+        
+        //this is faster than findSubstringWithStar()
+        
+        //let s = "xabcdey"
+        //var x = "ab*de"
+        
+        //        let s = "juliasamanthantjulia"
+        //        var x = "ant"
+        
+        //        let s = "juliasamanthasamanthajulia"
+        //        var x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        var x = "ant*as"
+        
+        var startIdx = -1
+        
+        let xArr = x.split(separator: "*").map(String.init)
+        if xArr.count == 2 {
+            
+            x = x.replacingOccurrences(of: "*", with: ".")
+            
+            let resArr = matches(for: x, in: s)
+            if resArr.count == 1 {
+                let res = resArr[0]
+                if let range = s.range(of: res) {
+                    startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+                }
+            }
+        } else if xArr.count == 1 {
+            if let range = s.range(of: x) {
+                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+            }
+        }
+        
+        return startIdx
+    }
+    
+    func findSubstringWithStar3() -> Int {
+        
+        //faster than findSubstringWithStar2()
+        
+        //let s = "xabcdey"
+        //var x = "ab*de"
+        
+        //        let s = "juliasamanthantjulia"
+        //        var x = "ant"
+        
+        //                let s = "juliasamanthasamanthajulia"
+        //                var x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        var x = "ant*as"
+        
+        var startIdx = -1
+        
+        x = x.replacingOccurrences(of: "*", with: ".")
+        
+        let resArr = matches(for: x, in: s)
+        if resArr.count == 1 {
+            let res = resArr[0]
+            if let range = s.range(of: res) {
+                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+            }
+        }
+        
+        return startIdx
+    }
+    
+    func findSubstringWithStar4() -> Int {
+        
+        //faster than findSubstringWithStar3()
+        //fastest of all !
+        
+        //        let s = "juliasamanthasamanthajulia"
+        //        var x = "has"
+        
+        let s = "juliasamanthasamanthajulia"
+        var x = "ant*as"
+        
+        x = x.replacingOccurrences(of: "*", with: ".")
+        
+        var startIdx = -1
+        
+        if let range = s.range(of: x, options: .regularExpression) {
+            startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
+        }
+        
+        return startIdx
+    }
+    
+    //valid coordinates
+    /*
+     (75, 180)
+     (+90.0, -147.45)
+     (77.11112223331, 149.99999999)
+     (+90, +180)
+     (90, 180)
+     (-90.00000, -180.0000)
+     (75, 280)
+     (+190.0, -147.45)
+     (77.11112223331, 249.99999999)
+     (+90, +180.2)
+     (90., 180.)
+     (-090.00000, -180.0000)
+     
+     //valid range:
+     -90 <= x <= +90
+     -180 <= Y <= 180
+     
+     exp output:
+     Valid
+     Valid
+     Valid
+     Valid
+     Valid
+     Valid
+     Invalid
+     Invalid
+     Invalid
+     Invalid
+     Invalid
+     Invalid
+     */
+    
+    func isValidCoordinate() -> Void {
+        
+        let coordinates = [
+            "(75, 180)",
+            "(+90.0, -147.45)",
+            "(77.11112223331, 149.99999999)",
+            "(+90, +180)",
+            "(90, 180)",
+            "(-90.00000, -180.0000)",
+            "(75, 280)",
+            "(+190.0, -147.45)",
+            "(77.11112223331, 249.99999999)",
+            "(+90, +180.2)",
+            "(90., 180.)",
+            "(-090.00000, -180.0000)"
+        ]
+        
+        for s in coordinates {
+            
+            /*
+            let cleanCoord = coord.replacingOccurrences(of: "[\\() ]", with: "", options: .regularExpression, range: nil)
+            let splits = cleanCoord.split(separator: ",")
+            
+            var isValid = false
+            
+            if splits.count == 2 {
+                let x = String(splits[0])
+                let y = String(splits[1])
+                
+                if let dx = Double(x), let dy = Double(y) {
+                    if dx >= -90 && dx <= 90 && dy >= -180 && dy <= 180 {
+                        isValid = true
+                    }
+                }
+            }
+            
+            print(isValid ? "Valid" : "Invalid")
+            */
+            
+            let x = "-100"
+        
+            if let range = x.range(of: "-?[1-9]", options: .regularExpression) {
+                let startIdx = Int(x.distance(from: s.startIndex, to: range.lowerBound))
+                print("")
+            }
+        }
+    }
+    
+    //                                                              PASSED SECTION !!!
 
     //====================================================================================================================================================================//
-    
-    
-    //==== Passed section !!
     
     //to be confirmed !
     func numComplement(_ n:Int) -> Int {
@@ -2731,6 +3052,32 @@ class ViewController: UIViewController {
         print("res num: \(res), res bin: \(binResStr)")
         
         return res
+    }
+    
+    //all pased !
+    //jump to the flag
+    func jumps() -> Int {
+        
+        //k = height of flag
+        //j = unit of jump
+        
+        let k = 3
+        let j = 3
+        
+        var i = 0
+        var count = 0
+        
+        while i < k {
+            if i + j <= k {
+                i += j
+                count += 1
+            } else {
+                i += 1
+                count += 1
+            }
+        }
+        
+        return count
     }
     
     //all passed ! (yewww !!)
@@ -3051,7 +3398,6 @@ class ViewController: UIViewController {
         return sorted
     }
     
-    
     //last 3 timeout...
     func rearrange(elements: [Int]) -> [Int] {
         
@@ -3155,153 +3501,6 @@ class ViewController: UIViewController {
         return res
     }
     
-    func matches(for regex: String, in text: String) -> [String] {
-        
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: text,
-                                        range: NSRange(text.startIndex..., in: text))
-            return results.map {
-                String(text[Range($0.range, in: text)!])
-            }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
-        }
-    }
-    
-    func findSubstringWithStar() -> Int {
-        
-        //let s = "xabcdey"
-        //let x = "ab***de"
-        
-//        let s = "juliasamanthantjulia"
-//        let x = "ant"
-        
-//        let s = "juliasamanthasamanthajulia"
-//        let x = "has"
-        
-        let s = "juliasamanthasamanthajulia"
-        let x = "ant*as"
-        
-        var startIdx = -1
-        
-        let xArr = x.split(separator: "*").map(String.init)
-        if xArr.count == 2 {
-            let left = xArr[0]
-            let right = xArr[1]
-            
-            let resArr = matches(for: "\(left).\(right)", in: s)
-            if resArr.count == 1 {
-                let res = resArr[0]
-                if let range = s.range(of: res) {
-                    startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
-                }
-            }
-            
-        } else if xArr.count == 1 {
-            if let range = s.range(of: x) {
-                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
-            }
-        }
-        
-        print("startIdx: \(startIdx)")
-        
-        return startIdx
-    }
-    
-    func findSubstringWithStar2() -> Int {
-        
-        //this is faster than findSubstringWithStar()
-        
-        //let s = "xabcdey"
-        //var x = "ab*de"
-        
-//        let s = "juliasamanthantjulia"
-//        var x = "ant"
-        
-//        let s = "juliasamanthasamanthajulia"
-//        var x = "has"
-        
-        let s = "juliasamanthasamanthajulia"
-        var x = "ant*as"
-        
-        var startIdx = -1
-        
-        let xArr = x.split(separator: "*").map(String.init)
-        if xArr.count == 2 {
-            
-            x = x.replacingOccurrences(of: "*", with: ".")
-            
-            let resArr = matches(for: x, in: s)
-            if resArr.count == 1 {
-                let res = resArr[0]
-                if let range = s.range(of: res) {
-                    startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
-                }
-            }
-        } else if xArr.count == 1 {
-            if let range = s.range(of: x) {
-                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
-            }
-        }
-        
-        return startIdx
-    }
-    
-    func findSubstringWithStar3() -> Int {
-        
-        //faster than findSubstringWithStar2()
-        
-        //let s = "xabcdey"
-        //var x = "ab*de"
-        
-        //        let s = "juliasamanthantjulia"
-        //        var x = "ant"
-        
-//                let s = "juliasamanthasamanthajulia"
-//                var x = "has"
-        
-        let s = "juliasamanthasamanthajulia"
-        var x = "ant*as"
-        
-        var startIdx = -1
-        
-        x = x.replacingOccurrences(of: "*", with: ".")
-        
-        let resArr = matches(for: x, in: s)
-        if resArr.count == 1 {
-            let res = resArr[0]
-            if let range = s.range(of: res) {
-                startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
-            }
-        }
-        
-        return startIdx
-    }
-    
-    func findSubstringWithStar4() -> Int {
-        
-        //faster than findSubstringWithStar3()
-        //fastest of all !
-        
-//        let s = "juliasamanthasamanthajulia"
-//        var x = "has"
-        
-        let s = "juliasamanthasamanthajulia"
-        var x = "ant*as"
-        
-        x = x.replacingOccurrences(of: "*", with: ".")
-        
-        var startIdx = -1
-        
-        if let range = s.range(of: x, options: .regularExpression) {
-            startIdx = Int(s.distance(from: s.startIndex, to: range.lowerBound))
-        }
-        
-        return startIdx
-    }
-
     //============================
 
     // Performance
