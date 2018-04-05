@@ -2986,6 +2986,10 @@ class ViewController: UIViewController {
      Invalid
      */
     
+    //X = -90 to 90
+    //Y = -180 to 180
+    
+    //tbc
     func isValidCoordinate() -> Void {
         
         let coordinates = [
@@ -2995,6 +2999,7 @@ class ViewController: UIViewController {
             "(+90, +180)",
             "(90, 180)",
             "(-90.00000, -180.0000)",
+            
             "(75, 280)",
             "(+190.0, -147.45)",
             "(77.11112223331, 249.99999999)",
@@ -3003,13 +3008,14 @@ class ViewController: UIViewController {
             "(-090.00000, -180.0000)"
         ]
         
+        print("")
+        
         for s in coordinates {
             
-            /*
-            let cleanCoord = coord.replacingOccurrences(of: "[\\() ]", with: "", options: .regularExpression, range: nil)
-            let splits = cleanCoord.split(separator: ",")
+            let cleanCoord = s.replacingOccurrences(of: "[\\() ]", with: "", options: .regularExpression, range: nil)
+            let splits = cleanCoord.characters.split(separator: ",")
             
-            var isValid = false
+            var isInRange = false
             
             if splits.count == 2 {
                 let x = String(splits[0])
@@ -3017,21 +3023,26 @@ class ViewController: UIViewController {
                 
                 if let dx = Double(x), let dy = Double(y) {
                     if dx >= -90 && dx <= 90 && dy >= -180 && dy <= 180 {
-                        isValid = true
+                        isInRange = true
                     }
                 }
             }
             
-            print(isValid ? "Valid" : "Invalid")
-            */
-            
-            let x = "-100"
-        
-            if let range = x.range(of: "-?[1-9]", options: .regularExpression) {
-                let startIdx = Int(x.distance(from: s.startIndex, to: range.lowerBound))
-                print("")
+            if isInRange {
+                if let _ = s.range(of: "\\([-+]?[0-9][0-9]?\\.?[0-9]+\\, [-+]?[1]?[0-9][0-9]?\\.?[0-9]+\\)", options: .regularExpression) {
+                    //print("Valid")
+                    print("\(s): Valid")
+                } else {
+                    //print("Invalid")
+                    print("\(s): Invalid")
+                }
+            } else {
+                //print("Invalid")
+                print("\(s): Invalid")
             }
         }
+        
+        print("")
     }
     
     //magical binary
