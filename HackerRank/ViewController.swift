@@ -683,6 +683,7 @@ class ViewController: UIViewController {
     */
 
     //21/100 ??
+    //12/18 -> the rest timeout
     func closestNumbers(numbers: [Int]) -> Void {
         let n = numbers.count
         let sorted = numbers.sorted(by: < )
@@ -2939,7 +2940,10 @@ class ViewController: UIViewController {
     //X = -90 to 90
     //Y = -180 to 180
     
+    //consider symbols for degrees or radians or N/S/E/W
+    
     //tbc
+    //4/6
     func isValidCoordinate() -> Void {
         
         let coordinates = [
@@ -2980,15 +2984,15 @@ class ViewController: UIViewController {
             
             if isInRange {
                 if let _ = s.range(of: "\\([-+]?[0-9][0-9]?\\.?[0-9]+\\, [-+]?[1]?[0-9][0-9]?\\.?[0-9]+\\)", options: .regularExpression) {
-                    //print("Valid")
-                    print("\(s): Valid")
+                    print("Valid")
+                    //print("\(s): Valid")
                 } else {
-                    //print("Invalid")
-                    print("\(s): Invalid")
+                    print("Invalid")
+                    //print("\(s): Invalid")
                 }
             } else {
-                //print("Invalid")
-                print("\(s): Invalid")
+                print("Invalid")
+                //print("\(s): Invalid")
             }
         }
         
@@ -3176,6 +3180,74 @@ class ViewController: UIViewController {
         return minSum
     }
     
+    /*
+     4
+     1
+     3
+     2
+     5
+     
+     output: 1 (4, 3, 2)
+     
+     
+     15
+     10
+     1
+     7
+     8
+     
+     output: 3 (15, 10, 1), (15, 10, 7), (15, 10, 8)
+     
+     4, 1, 3
+     
+     */
+    
+    //3/12
+    func maxInversions() -> Int {
+        
+        //let prices = [4, 1, 3, 2, 5]
+        let prices = [15, 10, 1, 7, 8]
+        
+        var i = 0
+        var j = 0
+        var k = 0
+        
+        let n = prices.count
+        var count = 0
+        
+        while i < n {
+            
+            let pI = prices[i]
+            
+            if i + 1 < n {
+                
+                let pINext = prices[i+1]
+                
+                if pINext < pI {
+                    
+                    j = i + 1
+                    k = j + 1
+                    
+                    while k < n {
+                        
+                        let pJ = prices[j]
+                        let pK = prices[k]
+                        
+                        if pI > pJ && pJ > pK && i < j && j < k {
+                            count += 1
+                        }
+                        
+                        k += 1
+                    }
+                }
+            }
+            
+            i += 1
+        }
+        
+        return count
+    }
+    
     //                                                              PASSED SECTION !!!
 
     //====================================================================================================================================================================//
@@ -3228,6 +3300,28 @@ class ViewController: UIViewController {
         print(res)
         
         return res
+    }
+    
+    //all passed ! (yay !~~)
+    func closestNumbers2(numbers: [Int]) -> Void {
+ 
+        let n = numbers.count
+        let sorted = numbers.sorted(by: < )
+        var min = Int.max
+        
+        for i in 0 ..< n - 1 {
+            let diff = abs(sorted[i+1] - sorted[i])
+            if diff < min {
+                min = diff
+            }
+        }
+        
+        for i in 0 ..< n - 1 {
+            let diff = abs(sorted[i+1] - sorted[i])
+            if diff == min {
+                print("\(sorted[i]) \(sorted[i+1])")
+            }
+        }
     }
     
     //to be confirmed !

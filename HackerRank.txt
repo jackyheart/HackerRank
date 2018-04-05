@@ -673,3 +673,15 @@ pixerf ip address:
 116.12.138.25
 
 
+
+d8@dispostable.com @ 5 April 2018:
+UIButton hierarchy: ok
+Not Running state: ok
+Default UI property -> atomic: ok
+missing words: all ok
+Closest numbers: all ok
+price inversions: 3 passed, all failed
+matrix sum: runtime error and timeout (what ??!!)
+String Transformations (cyclycal alphabet): all ok
+
+
