@@ -19,7 +19,12 @@ class ViewController: UIViewController {
 //        evaluateProblem3()
         
         //isValidCoordinate()
-        powerOfFive()
+        //powerOfFive()
+        //checkDivisibility()
+        //canReach(1, 2, 2, 1)
+        //findMatrix4()
+        //longestSubsequence()
+        groupSheepAndCows()
         
         //easyStrings3()
         
@@ -769,11 +774,105 @@ class ViewController: UIViewController {
         return false
     }
     
-    func canReach(x1: Int, y1: Int, x2: Int, y2: Int) -> String {
+    /*
+     1
+     4
+     5
+     9
+     return yes
+     
+     1
+     2
+     2
+     1
+     return no
+     */
+    
+    //1 wrong answer !!
+    func move2(_ x1:Int, _ y1:Int, _ x2: Int, _ y2: Int) -> Bool {
+        
+        var x = x1
+        var y = y1
+        
+        if x2 < x1 {
+            return false
+        }
+        
+        if y2 < y1 {
+            return false
+        }
+        
+        var isFound = false
+        
+        //move x first
+//        while x < x2 {
+//            x += y
+//        }
+//
+//        while y < y2 {
+//            y += x
+//        }
+//
+//        if x == x2 && y == y2 {
+//            isFound = true
+//        }
+//
+//        if !isFound {
+//            //if still not found
+//
+//            //move y first
+//            x = x1
+//            y = y1
+//
+//            while y < y2 {
+//                y += x
+//            }
+//
+//            while x < x2 {
+//                x += y
+//            }
+//
+//            if x == x2 && y == y2 {
+//                isFound = true
+//            }
+//        }
+        
+        if !isFound {
+            //if still not found
+            
+            //move alternate
+            x = x1
+            y = y1
+            var count = 0
+            
+            while x < x2 || y < y2 {
+                
+                if count % 2 == 0 {
+                    x += y
+                } else {
+                    y += x
+                }
+                
+//                if x >= x2 && y >= y2 {
+//                    break
+//                }
+                
+                count += 1
+            }
+            
+            if x == x2 && y == y2 {
+                isFound = true
+            }
+        }
+        
+        return isFound
+    }
+    
+    func canReach(_ x1: Int, _ y1: Int, _ x2: Int, _ y2: Int) -> String {
         //var x = x1
         //var y = x1
         
-        return move(x1, y1, x2, y2) ? "Yes" : "No"
+        return move2(x1, y1, x2, y2) ? "Yes" : "No"
     }
     
     func countSubstring1() {
@@ -1314,6 +1413,47 @@ class ViewController: UIViewController {
         return max
     }
     
+    func longestChain2() -> Int {
+        
+        let words = ["a", "b", "ba", "bca", "bda", "bdca"]
+        //exp 4
+        
+        //ba -> a; ba -> b
+        
+        //bca -> ba -> a; bca -> ba -> b
+        //bda -> ba -> a; bda -> ba -> b
+        
+        //bdca -> bda -> ba -> a
+        //bdca -> bda -> ba -> b
+        //bdca -> bca -> ba -> a
+        //bdca -> bca -> ba -> b
+        
+        //[a, and, an, bear]
+        //exp 3
+        
+        //let n = words.count
+        var max = 0
+
+        for w in words {
+            
+            let wCount = w.count
+            if wCount == 1 {
+                max = 1
+            } else {
+                var subCount = wCount - 1
+                while subCount > 0 {
+                    for i in 0 ..< wCount - 1 {
+                        for j in i+1 ..< wCount {
+                            
+                        }
+                    }
+                }
+            }
+        }
+
+        return max
+    }
+    
     //== Testing...
     
     func testSwap() {
@@ -1414,6 +1554,7 @@ class ViewController: UIViewController {
     //====
     
     func permuteLoopDiv8(_ n:Int, _ s:[String]) -> Bool {
+        
         var c = [Int].init(repeating: 0, count: n)
         var A = s
         
@@ -1447,27 +1588,63 @@ class ViewController: UIViewController {
     }
     
     //4/11, 3 wrongs, 4 timeout
-    func checkDivisibility(arr: [String]) -> [String] {
+    func checkDivisibility() -> [String] {
         
+        let arr = ["9000000001"]
         var res:[String] = []
         
         for s in arr {
             
             if let intVal = Int(s) {
+                
+                var isFound = false
+                
                 if intVal % 8 == 0 {
-                    res.append("YES")
+                    isFound = true
                 } else {
+                    
                     let sArr = Array(s).map { String($0) }
                     let n = sArr.count
-                    let isFound = permuteLoopDiv8(n, sArr)
                     
-                    if isFound {
-                        res.append("YES")
-                    } else {
-                        res.append("NO")
+                    //check if all contains same character
+                    var isAllSame = false
+                    if n > 0 {
+                        let first = sArr[0]
+                        let filtered = sArr.filter({ $0 == first })
+                        if filtered.count == n {
+                            isAllSame = true
+                        }
                     }
+    
+                    if isAllSame {
+                        isFound = false
+                    } else {
+                        let sortedArr = sArr.sorted()
+                        let sorted = sortedArr.joined()
+                        
+                        var isSortedDiv8 = false
+                        if let sortedInt = Int(sorted) {
+                            if sortedInt % 8 == 0 {
+                                isSortedDiv8 = true
+                            }
+                        }
+                        
+                        if isSortedDiv8 {
+                            isFound = true
+                        } else {
+                            isFound = permuteLoopDiv8(n, sortedArr)
+                        }
+                    }
+                } //end else
+                
+                if isFound {
+                    res.append("YES")
+                } else {
+                    res.append("NO")
                 }
+                
             } else {
+                //string not converted to intVal
                 res.append("NO")
             }
         }
@@ -1526,6 +1703,99 @@ class ViewController: UIViewController {
         }
         
         print(res)
+        
+        return res
+    }
+    
+    //correct count !! (tbc) - not all passed...
+    func findMatrix3(_ a: [[Int]]) -> [[Int]] {
+        var res = a
+        var tmp = a
+        
+        let row = a.count
+        
+        for x in 0 ..< row {
+            for y in 0 ..< row {
+                
+                if x == 0 && y == 0 {
+                    res[x][y] = a[x][y]
+                } else {
+                    
+                    if y == 0 {
+                        tmp[x][y] = a[x][y]
+                    }
+                    else {
+                        tmp[x][y] = tmp[x][y] + tmp[x][y-1]
+                    }
+                    
+                    if x == 0 {
+                        res[x][y] = tmp[x][y]
+                    } else {
+                        res[x][y] = tmp[x][y] + res[x-1][y]
+                    }
+                }
+            }
+        }
+        
+        //        print("tmp:")
+        //        print(tmp)
+        //
+        //        print("res:")
+        //        print(res)
+        
+        return res
+    }
+    
+    func findMatrix4() -> [[Int]] {
+        
+        let a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+        
+        /*
+         res:
+         1  3  6
+         5  12 21
+         12 27 45
+         */
+        
+        var res = a
+        var tmp = a
+        
+        let row = a.count
+        var col = row
+        
+        if a.count > 0 {
+            col = a[0].count
+        }
+        
+        for x in 0 ..< row {
+            for y in 0 ..< col {
+                
+                if x == 0 && y == 0 {
+                    res[x][y] = a[x][y]
+                }
+                else {
+                    
+                    if y == 0 {
+                        tmp[x][y] = a[x][y]
+                    }
+                    else {
+                        tmp[x][y] = tmp[x][y] + tmp[x][y-1]
+                    }
+                    
+                    if x == 0 {
+                        res[x][y] = tmp[x][y]
+                    } else {
+                        res[x][y] = tmp[x][y] + res[x-1][y]
+                    }
+                }
+            }
+        }
+        
+        //        print("tmp:")
+        //        print(tmp)
+        //
+        //        print("res:")
+        //        print(res)
         
         return res
     }
@@ -2383,7 +2653,12 @@ class ViewController: UIViewController {
     
     //final discounted price
     //3/13 wrong answers, timeout...
-    func finalPrice(prices: [Int]) -> Void {
+    func finalPrice() -> Void {
+        
+        //let prices = [2, 3, 1, 2, 4, 2], exp: 8
+        //let prices = [5, 1, 3, 4, 6, 2]// exp: 14, 1 5
+        let prices = [1, 3, 3, 2, 5]// exp: 9, 0 3 4
+        
         let n = prices.count
         var sum = 0
         var res:[Int] = []
@@ -2396,6 +2671,7 @@ class ViewController: UIViewController {
                 let sub = prices[i+1 ..< n]
                 let min = sub.min()!
                 
+                //check if sub contains current price item, if yes, no increment (price: 0)
                 if !sub.contains(curP) {
                     if curP > min {
                         let diff = curP - min
@@ -2423,7 +2699,7 @@ class ViewController: UIViewController {
         //print("")
     }
     
-    func substringCalculator() -> Int {
+    func substringCalculator1() -> Int {
         
         //let s = "kincenvizh"
         
@@ -2448,6 +2724,31 @@ class ViewController: UIViewController {
                 }
             }
         }
+        
+        return count
+    }
+    
+    func substringCalculator1a() -> Int {
+        
+        //let s = "kincenvizh"
+        
+        let s = "ghaqjdrmnegmrlrlfpjmnnngpwalzknsencuzwsnhfltwohdgbmvfuwtquosrnyerucntxxkfqehjqygcarxogvcfkljzbzutxphpyykapncjfclnhndzxghelyvzpylazhuutmcquusexzbhsfsmbnlvnlemzvfqbfzwquairhpylnbvyhiyamztlhfchhbwrqddmuzsprfdwuqqchcpeakkexackwwzihkfenwzwckynymgqydvjtovaoezkjjurylqcuonsujycziobnfnmuwnoxcdtahpituykvgpyyshvukrstcbmnsqtjseflwywnslmvnqrtnzkyaddkjamrezprqgoenzsdryygbkeahfiduozpwkrgmatszaxmwodsqiocvagbvxyqotpaujnqvqgjmfxnxhfbwqjpgodlxdrxpjpmzeabpgqrzpxomniknjkdiwtfgyvwvekrnoupwkcbtmpcfamzrghgrznuedkybmfwctdghcfawajlxfkzhdamuygjbcwnyglkjlfmpxfdtovkqbshhrfrnyjrgxgiozsuuncnwofkqzsypwgeikpfbhryhpszegdfajzvqlwwqlnvdtdiuckcvvosrdweohnmawqonjbxyjjhlccuteeshfrxxdhzgakwjqbymnaeudcmibsytyajsgdpfvrutcpglzxdevenevmkgalcrpknuvcrnkuboennhyzirfwvtozzijujsckbxqpocakzrbwgpqgjjmsrtwmvhwyraukbuxfvebeylfpipzwjdzlmgslbtwzataxgqpasrssnfwndldwkdutdqcmcpyanrbdsxrvcvpsywjambtbzlcrvzesuhvyvwwuwwdznigxjxknfajpknqutfvvqynkpvkzgypasevrpxofbymdzcitoqolwqegocuyqsexhumzmckzuuwkamolbltlifongpvkcnrnnuplftqbxpdnegdqlymftqyrxcnzmu"
+        
+        var res:Set<String> = []
+        let chars = Array(s).map(String.init)
+        let n = s.count
+        
+        for i in 0 ..< n {
+            let sub = Array(chars[i ..< n])
+            let nSub = sub.count
+            
+            for j in 0 ..< nSub {
+                let subDistinct = sub[0 ..< (nSub - j)].joined()
+                res.insert(subDistinct)
+            }
+        }
+        
+        let count = res.count
         
         return count
     }
@@ -3250,7 +3551,176 @@ class ViewController: UIViewController {
         return count
     }
     
-    //                                                              PASSED SECTION !!!
+    func minArea(x: [Int], y: [Int], k: Int) -> Int {
+        
+        let x = [0, 2]
+        let y = [0, 4]
+        
+        return 1
+    }
+    
+    //subsequence and substrings
+    func longestSubsequence() -> Int {
+        
+        let x = "hackerranks"
+        let y = "hackers"
+        
+//        let x = "aabcd"
+//        let y = "aabc"
+        
+        if x == y {
+            return y.count
+        }
+        
+        if x.range(of:y) != nil {
+            return y.count
+        }
+        
+        let xArr = Array(x).map { String($0) }
+        let yArr = Array(y).map { String($0) }
+        
+        let xN = xArr.count
+        let yN = yArr.count
+        
+        var setX:Set<String> = []
+        setX.insert(x)
+        //print(x)
+        
+        var setY:Set<String> = []
+        
+        var i = 0
+        for k in 0 ..< xN - 1 {
+            let curN = ((xN - 1) - k)
+            let limit = curN - 1
+            i = 0
+            
+            while i + limit < xN {
+                
+                for j in (i + limit) ..< xN {
+                    let sub = xArr[i ..< (i + limit)].joined() + xArr[j]
+                    
+//                    if setX.contains(sub) {
+//                        print(sub + "(dup)")
+//                    } else {
+//                        print(sub)
+//                    }
+                    
+                    setX.insert(sub)
+                }
+                
+                i += 1
+            }
+        }
+
+        var reduce = 0
+        for i in 0 ..< yN {
+            for j in 0 ..< yN - reduce {
+                let end = yN - j
+                let sub = yArr[i ..< end].joined()
+                setY.insert(sub)
+                //print(sub)
+            }
+            reduce += 1
+        }
+        
+        let res = setX.intersection(setY)
+        let sorted = res.sorted(by: { $0.count < $1.count })
+        if sorted.isEmpty {
+            //print("no intersection, len: 0")
+            return 0
+        }
+        
+        let len = sorted.last!.count
+        //print("longest element, len: \(len)")
+
+        return len
+    }
+    
+    /*
+     YNNY
+     NYNY
+     NYNN
+     
+     output: 4
+     */
+    
+    //2/9 4 wrongs, 3 timeout
+    func groupSheepAndCows() -> Int {
+        
+        let grid = ["YNNY", "NYNY", "NYNN"]
+        
+        let row = grid.count
+        var col = row
+        
+        if grid.count > 0 {
+            let val = grid[0]
+            col = val.count
+        }
+        
+        var gridArr:[[Int]] = Array(repeating: Array(repeating: 0, count: col), count: row)
+        
+        var fields = 0
+        for i in 0 ..< row {
+            let gridStr = grid[i]
+            let strArr = Array(gridStr).map { String($0) }
+            
+            for j in 0 ..< col {
+                let val = strArr[j]
+                if val == "Y" {
+                    gridArr[i][j] = 1
+                    fields += 1
+                }
+                
+                if i > 0 && j > 0 {
+                    
+                    if gridArr[i][j] == 1 {
+                    
+                        //peek left
+                        if gridArr[i][j-1] == 1 {
+                            fields -= 1
+                        }
+                        
+                        //peek right
+                        if j+1 < col {
+                            if gridArr[i][j+1] == 1 {
+                                fields -= 1
+                            }
+                        }
+                        
+                        //peek top
+                        if gridArr[i-1][j] == 1 {
+                            fields -= 1
+                        }
+                        
+                        //peek bottom
+                        if i+1 < row {
+                            if gridArr[i+1][j] == 1 {
+                                fields -= 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        //debug
+//        for i in 0 ..< row {
+//            var rowStr = ""
+//            for j in 0 ..< col {
+//                rowStr += "\(gridArr[i][j])"
+//            }
+//            print(rowStr)
+//        }
+        
+        let combinations = pow(2, fields-1)
+        let result = Int(NSDecimalNumber(decimal: combinations))
+        
+        //res modulo 1000000007
+        
+        return result
+    }
+    
+    //                                                              GO ALL PASSED SECTION !!!
 
     //====================================================================================================================================================================//
     
@@ -3473,45 +3943,6 @@ class ViewController: UIViewController {
         print("")
     }
     
-    //correct count !! (tbc)
-    func findMatrix2(_ a: [[Int]]) -> [[Int]] {
-        var res = a
-        var tmp = a
-        
-        let row = a.count
-        
-        for x in 0 ..< row {
-            for y in 0 ..< row {
-                
-                if x == 0 && y == 0 {
-                    res[x][y] = a[x][y]
-                } else {
-                    
-                    if y == 0 {
-                        tmp[x][y] = a[x][y]
-                    }
-                    else {
-                        tmp[x][y] = tmp[x][y] + tmp[x][y-1]
-                    }
-                    
-                    if x == 0 {
-                        res[x][y] = tmp[x][y]
-                    } else {
-                        res[x][y] = tmp[x][y] + res[x-1][y]
-                    }
-                }
-            }
-        }
-        
-        //        print("tmp:")
-        //        print(tmp)
-        //
-        //        print("res:")
-        //        print(res)
-        
-        return res
-    }
-
     //all passed !!! (Last Substring)
     //timeout on (Substring calculator)
     func countSubstring3() -> Int {
@@ -3574,6 +4005,7 @@ class ViewController: UIViewController {
     }
     
     //all passed !!
+    //Distinct pairs
     func numberOfPairs(a: [Int], k: Int) -> Int {
         /*
          * Write your code here.

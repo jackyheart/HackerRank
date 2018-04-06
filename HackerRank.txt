@@ -454,6 +454,25 @@ public class Solution {
         return count;
     }
 
+//using Java Set
+        static long substringCalculator(String s) {
+                Set<String> set = new HashSet<String>(); 
+                //long count = 0;
+     
+                for(int i = 0; i < s.length(); i++)
+                {
+                    String sub = s.substring(i);
+     
+                    for(int j = 0; j < sub.length(); j++)
+                    {
+                        String subDistinct = sub.substring(0, sub.length() - j);
+                        set.add(subDistinct);
+                    }
+                }
+        
+        return set.size();
+    }
+
     ===================
 
 permutation % 8 
@@ -674,7 +693,9 @@ pixerf ip address:
 
 
 
-d8@dispostable.com @ 5 April 2018:
+d8@dispostable.com
+@ 5 April 2018:
+
 UIButton hierarchy: ok
 Not Running state: ok
 Default UI property -> atomic: ok
@@ -684,4 +705,5 @@ price inversions: 3 passed, all failed
 matrix sum: runtime error and timeout (what ??!!)
 String Transformations (cyclycal alphabet): all ok
 
+https://www.hackerrank.com/tests/9r8j4hatfb6/dd092ed7985c4b9cb55978135211a091
 
