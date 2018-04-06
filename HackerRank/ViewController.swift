@@ -1413,9 +1413,13 @@ class ViewController: UIViewController {
         return max
     }
     
+    //tbc
     func longestChain2() -> Int {
         
-        let words = ["a", "b", "ba", "bca", "bda", "bdca"]
+        let words = ["a", "and", "an", "bear"]
+        //let words = ["a", "b", "ba", "bca", "bda", "bdca"]
+        //let words = ["a", "b", "ba", "bca", "bda", "bdca"]
+        
         //exp 4
         
         //ba -> a; ba -> b
@@ -1433,24 +1437,70 @@ class ViewController: UIViewController {
         
         //let n = words.count
         var max = 0
-
-        for w in words {
+        var sortedWordsByCount = words.sorted(by: { $0.characters.count < $1.characters.count })
+        var hash:[String:Int] = [:]
+        
+        for i in  0 ..< sortedWordsByCount.count {
             
-            let wCount = w.count
+            let w = sortedWordsByCount[i]
+            
+            let wCount = w.characters.count
             if wCount == 1 {
                 max = 1
+                hash[w] = 1
             } else {
-                var subCount = wCount - 1
-                while subCount > 0 {
-                    for i in 0 ..< wCount - 1 {
-                        for j in i+1 ..< wCount {
-                            
+                
+                var wChars = Array(w.characters).map { String($0) }
+                var wCharsVar = wChars
+                var chain = 1
+                
+                var shouldBreakOutlerLoop = false
+                while wCharsVar.count > 1 {
+                    
+                    var idxToRemove = wCharsVar.count - 1
+                    let subCount = wCharsVar.count - 1
+                    
+                    while idxToRemove >= 0 {
+                        wCharsVar = wChars
+                        wCharsVar.remove(at: idxToRemove)
+                        let sub = wCharsVar.joined()
+                        
+                        if hash[sub] != nil {
+                            chain = hash[sub]! + chain
+                            shouldBreakOutlerLoop = true
+                            break
+                        } else {
+                            let filteredDict = sortedWordsByCount.filter({ $0.characters.count == subCount })
+                            if filteredDict.contains(sub) {
+                                wCharsVar = Array(sub.characters).map { String($0) }
+                                wChars = wCharsVar
+                                chain += 1
+                                break
+                            }
+                        }
+                        
+                        idxToRemove -= 1
+                        
+                        if idxToRemove < 0 {
+                            //sub not found in dict
+                            shouldBreakOutlerLoop = true
                         }
                     }
+                    
+                    if shouldBreakOutlerLoop {
+                        break
+                    }
+                }
+                
+                let wCharsJoined = wChars.joined()
+                hash[wCharsJoined] = chain
+                
+                if chain > max {
+                    max = chain
                 }
             }
         }
-
+        
         return max
     }
     
@@ -3297,7 +3347,7 @@ class ViewController: UIViewController {
             }
         }
         
-        print("")
+        //print("")
     }
     
     //magical binary
@@ -3551,6 +3601,74 @@ class ViewController: UIViewController {
         return count
     }
     
+    //???
+    func maxInversions2() -> Int {
+        
+        //let prices = [4, 1, 3, 2, 5]
+        let prices = [15, 10, 1, 7, 8]
+        
+        var i = 0
+        var j = 0
+        var k = 0
+        
+        let n = prices.count
+        var count = 0
+        
+        while i < n - 2 {
+            
+            let pI = prices[i]
+
+            j = i + 1
+            while j < n - 1 {
+                
+                let pJ = prices[j]
+                
+                k = j + 1
+                while k < n {
+                    let pK = prices[k]
+                    if pI > pJ && pJ > pK && i < j && j < k {
+                        count += 1
+                    }
+                   
+                    k += 1
+                }
+                
+                j += 1
+            }
+            
+            i += 1
+        }
+        
+        return count
+    }
+    
+    func maxInversions3() -> Int {
+        
+        //let prices = [4, 1, 3, 2, 5]
+        let prices = [15, 10, 1, 7, 8]
+        
+        let n = prices.count
+        var count = 0
+        
+        for i in 0 ..< n - 2 {
+            let pI = prices[i]
+            
+            for j in i+1 ..< n - 1 {
+                let pJ = prices[j]
+                
+                for k in j+1 ..< n {
+                    let pK = prices[k]
+                    
+                    if pI > pJ && pJ > pK && i < j && j < k {
+                        count += 1
+                    }
+                }
+            }
+        }
+        
+        return count
+    }
+    
     func minArea(x: [Int], y: [Int], k: Int) -> Int {
         
         let x = [0, 2]
@@ -3560,6 +3678,7 @@ class ViewController: UIViewController {
     }
     
     //subsequence and substrings
+    //2/10, rest timeout
     func longestSubsequence() -> Int {
         
         let x = "hackerranks"
@@ -3720,6 +3839,122 @@ class ViewController: UIViewController {
         return result
     }
     
+    func permuteLoopFindSearch(_ n:Int, _ s:[String], _ search:String) -> [String] {
+        var c = [Int].init(repeating: 0, count: n)
+        var A = s
+        
+        var res:Set<String> = []
+        
+        //print(A)
+        res.insert(A.joined())
+        
+        var i = 0
+        while i < n {
+            if c[i] < i {
+                if i % 2 == 0 {
+                    A.swapAt(0, i)
+                } else {
+                    A.swapAt(c[i], i)
+                }
+                
+                //print("i:\(i)")
+                //print(A)
+                res.insert(A.joined())
+                
+                c[i] += 1
+                i = 0
+            }
+            else {
+                c[i] = 0
+                i += 1
+            }
+        }
+        
+        return Array(res)
+    }
+    
+    func get_ranks(words: [String]) -> [Int] {
+        
+        var res:[Int] = []
+        
+        for w in words {
+            let wArr = Array(w).map { String($0) }
+            let wArrSorted = wArr.sorted()
+            let wArrSortedJoined = wArrSorted.joined()
+            if wArrSortedJoined == w {
+                res.append(0)
+                continue
+            }
+            
+            let permuteArr = permuteLoopFindSearch(wArrSorted.count, wArrSorted, w)
+            let permuteArrSorted = permuteArr.sorted()
+            //print(permuteArrSorted)
+            //print("")
+            
+            var rank = -1
+            if let idx = permuteArrSorted.index(of: w) {
+                rank = idx % 1000000007
+            }
+            res.append(rank)
+        }
+        
+        return res
+    }
+    
+    struct Point {
+        var value = 0
+        var index = 0
+        
+        init(_ v:Int, _ idx:Int) {
+            value = v
+            index = idx
+        }
+    }
+    
+    /*
+      {3, 5}
+      exp: 0 1
+     
+      {3, 3, 5}
+      exp: 0 1
+     
+      {6, 3, 3}
+      exp: 0 2
+     */
+    
+    func max_two(arr: [Int]) -> [Int] {
+        
+        var res:[Point] = []
+        var rStr:[String] = []
+        
+        //map all indexes
+        for i in 0 ..< arr.count {
+            let val = arr[i]
+            //let p = Point(val, i)
+            //res.append(p)
+            
+            rStr.append(String(val))
+        }
+        
+        /*
+         var sorted = res.sorted(by: {
+         
+         if $0.value == $1.value {
+         return $0.index < $1.index
+         }
+         
+         return $0.value > $1.value
+         })
+         */
+        
+        let sortedDec = rStr.sorted(by: >)
+        //let sortedDup = rStr.sorted(by: )
+        
+        print(sortedDec)
+        
+        return []
+    }
+    
     //                                                              GO ALL PASSED SECTION !!!
 
     //====================================================================================================================================================================//
@@ -3796,7 +4031,7 @@ class ViewController: UIViewController {
         }
     }
     
-    //to be confirmed !
+    //to be confirmed ! - all passed ! (great !)
     func numComplement(_ n:Int) -> Int {
         let binStr = String(n, radix: 2)
         let divStr = [String].init(repeating: "1", count: binStr.count).joined()
