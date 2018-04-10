@@ -3833,10 +3833,11 @@ class ViewController: UIViewController {
         
         let combinations = pow(2, fields-1)
         let result = Int(NSDecimalNumber(decimal: combinations))
+        let res = result % 1000000007
         
         //res modulo 1000000007
         
-        return result
+        return res
     }
     
     func permuteLoopFindSearch(_ n:Int, _ s:[String], _ search:String) -> [String] {
@@ -3925,34 +3926,56 @@ class ViewController: UIViewController {
     func max_two(arr: [Int]) -> [Int] {
         
         var res:[Point] = []
-        var rStr:[String] = []
-        
+       
         //map all indexes
         for i in 0 ..< arr.count {
             let val = arr[i]
-            //let p = Point(val, i)
-            //res.append(p)
-            
-            rStr.append(String(val))
+            let p = Point(val, i)
+            res.append(p)
         }
         
-        /*
-         var sorted = res.sorted(by: {
-         
-         if $0.value == $1.value {
-         return $0.index < $1.index
-         }
-         
-         return $0.value > $1.value
-         })
-         */
-        
-        let sortedDec = rStr.sorted(by: >)
-        //let sortedDup = rStr.sorted(by: )
-        
-        print(sortedDec)
+       // let filteredSame =
         
         return []
+    }
+    
+    //add1 , multiply 2
+    func getMinOperations(kValues: [Int]) -> [Int] {
+        for k in kValues {
+            
+            
+        }
+    }
+    
+    func factorial(_ n:Int) -> Int {
+        var res = 1
+        for i in 1 ..< n+1 {
+            res *= i
+        }
+        return res
+    }
+    
+    func getRanks2() -> [Int] {
+        
+        let words = ["cba"]
+        var ranks:[Int] = []
+        
+        for word in words {
+            let wArr = Array(word.characters).map { String($0) }
+            var wSorted = wArr.sorted(by: <)
+            
+            var rank = 0
+            for w in wArr {
+                if let idx = wSorted.index(of: w) {
+                    rank += idx * factorial(wSorted.count - 1)
+                    wSorted.remove(at: idx)
+                }
+            }
+            
+            ranks.append(rank)
+        }
+        
+        return ranks
     }
     
     //                                                              GO ALL PASSED SECTION !!!

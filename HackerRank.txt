@@ -682,6 +682,7 @@ dex@dispostable.com
 dex3@dispostable.com
 d19@dispostable.com
 
+https://www.dbs.com/hack2hire/sg/index.html
 https://www.hackerrank.com/tests/9r8j4hatfb6/dd092ed7985c4b9cb55978135211a091
 
 
@@ -706,3 +707,29 @@ price inversions: 3 passed, all failed
 matrix sum: runtime error and timeout (what ??!!)
 String Transformations (cyclycal alphabet): all ok
 
+
+Powerof 5 problem:
+https://www.careercup.com/question?id=6239886770176000
+https://stackoverflow.com/questions/32216179/check-if-binary-string-can-be-partitioned-such-that-each-partition-is-a-power-of
+
+Swift log function:
+https://stackoverflow.com/questions/35886583/does-swift-has-built-in-logarithm-function
+
+
+private boolean isPower (long val){
+        if (val == 0) {
+            return false ;
+        }
+        int n = (int)(Math.log(val) / Math.log(5));
+        return Math.pow(5, n) == val;
+    }
+
+next and previous permutation:
+https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+
+https://stackoverflow.com/questions/1622532/algorithm-to-find-next-greater-permutation-of-a-given-string
+
+Rank of a permutation!
+https://www.dcode.fr/permutation-rank
+
+https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
