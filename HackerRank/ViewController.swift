@@ -25,8 +25,9 @@ class ViewController: UIViewController {
         //findMatrix4()
         //longestSubsequence()
         //groupSheepAndCows()
-        checkDivisibilityBy8_2()
+        //checkDivisibilityBy8_2()
         //getMinOperations()
+        splitPowerOfFive()
         
         //easyStrings3()
         
@@ -3483,41 +3484,6 @@ class ViewController: UIViewController {
         return ""
     }
     
-    /*
-     101101101 -> 3
-     1111101 -> 1 --> cannot split further
-     0000 -> -1
-     */
-    
-    func powerOfFive() -> Int {
-        
-        //wrong solution !
-        
-        let s = "0000"
-        var count = 0
-        
-        let splits1 = s.components(separatedBy: "101")
-        count += (splits1.count-1)
-        
-        let splits2 = s.components(separatedBy: "1001")
-        count += (splits2.count-1)
-        
-        let splits3 = s.components(separatedBy: "10001")
-        count += (splits3.count-1)
-        
-        let splits4 = s.components(separatedBy: "100001")
-        count += (splits4.count-1)
-        
-        let splits5 = s.components(separatedBy: "1000001")
-        count += (splits5.count-1)
-        
-        if count == 0 {
-            count = -1
-        }
-        
-        return count
-    }
-    
     func maximumTwo() -> [Int] {
         
         return []
@@ -4115,7 +4081,98 @@ class ViewController: UIViewController {
         return ranks
     }
     
+    /*
+     101101101 -> 3
+     1111101 -> 1 --> cannot split further
+     0000 -> -1
+     */
     
+    func powerOfFive() -> Int {
+        
+        //wrong solution !
+        
+        let s = "0000"
+        var count = 0
+        
+        let splits1 = s.components(separatedBy: "101")
+        count += (splits1.count-1)
+        
+        let splits2 = s.components(separatedBy: "1001")
+        count += (splits2.count-1)
+        
+        let splits3 = s.components(separatedBy: "10001")
+        count += (splits3.count-1)
+        
+        let splits4 = s.components(separatedBy: "100001")
+        count += (splits4.count-1)
+        
+        let splits5 = s.components(separatedBy: "1000001")
+        count += (splits5.count-1)
+        
+        if count == 0 {
+            count = -1
+        }
+        
+        return count
+    }
+    
+    func splitPowerOfFive() -> Int {
+        
+        let s = "1111110001111"
+        //let s = "1111101"
+        //let s = "101101101"
+        
+        var binVar = ""
+        var exp = 1
+        var pow5Arr:[String] = []
+        
+        if s == "1" {
+            return 1
+        }
+        
+//        if let intVal = Int(s, radix: 2) {
+//
+//        }
+        
+        while binVar.count < s.count {
+            let powRes = pow(5, exp)
+            let powResInt = Int(NSDecimalNumber(decimal: powRes))
+            binVar = String(powResInt, radix: 2)
+            pow5Arr.append(binVar)
+            
+            exp += 1
+        }
+        
+        let pow5ArrDesc = pow5Arr.sorted(by: >)//descending
+        
+        var sVar = s
+        var count = 0
+        var pIdx = 0
+        
+        while sVar.count > 0 {
+            let p = pow5ArrDesc[pIdx]
+            if let range = sVar.range(of: p) {
+                sVar.removeSubrange(range)
+                count += 1
+                
+                if sVar.count == 0 {
+                    break
+                }
+            } else {
+                pIdx += 1
+                
+                if pIdx >= pow5ArrDesc.count {
+                    break
+                }
+            }
+        }
+        
+        if count == 0 {
+            count = -1
+        }
+        
+        return count
+    }
     
     //                                                              GO ALL PASSED SECTION !!!
 
