@@ -25,7 +25,8 @@ class ViewController: UIViewController {
         //findMatrix4()
         //longestSubsequence()
         //groupSheepAndCows()
-        checkDivisibilityBy8_2()
+        //checkDivisibilityBy8_2()
+        getMinOperations()
         
         //easyStrings3()
         
@@ -4042,12 +4043,30 @@ class ViewController: UIViewController {
     }
     
     //add1 , multiply 2
-    func getMinOperations(kValues: [Int]) -> [Int] {
+    func getMinOperations() -> [Int] {
+        
+        let kValues:[Int] = [4, 8]
+        
+        var res:[Int] = []
         for k in kValues {
             
+            var count = 1//starts from 1
+            var i = 1
             
+            while i * 2 < k {
+                i *= 2
+                count += 1
+            }
+            
+            while i + 1 < k {
+                i += 1
+                count += 1
+            }
+            
+            res.append(count)
         }
-        return []
+        
+        return res
     }
     
     func factorial(_ n:Int) -> Int {
