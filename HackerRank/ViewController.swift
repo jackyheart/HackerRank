@@ -24,7 +24,8 @@ class ViewController: UIViewController {
         //canReach(1, 2, 2, 1)
         //findMatrix4()
         //longestSubsequence()
-        groupSheepAndCows()
+        //groupSheepAndCows()
+        checkDivisibilityBy8_2()
         
         //easyStrings3()
         
@@ -1695,6 +1696,107 @@ class ViewController: UIViewController {
                 
             } else {
                 //string not converted to intVal
+                res.append("NO")
+            }
+        }
+        
+        return res
+    }
+    
+    func checkDivisibilityBy8_2() -> [String] {
+        
+        let arr = ["655"]
+        var res:[String] = []
+        
+        var latest8 = ""
+        var div8Arr:[String] = []
+        var i = 0
+        
+        while latest8.count < 4 {
+            let val = String(8 * i)
+            if val.count >= 4 {
+                break
+            }
+            
+            div8Arr.append(val)
+            latest8 = val
+            i += 1
+        }
+        
+        for s in arr {
+            
+            if let intVal = Int(s) {
+                var isFound = false
+                
+                if intVal % 8 == 0 {
+                    isFound = true
+                } else {
+                    
+                    let sArr = Array(s).map { String($0) }
+                    let sArrSorted = sArr.sorted(by: <)
+                    
+                    let sArrSortedJoined = sArrSorted.joined()
+                    if let intSorted = Int(sArrSortedJoined) {
+                        if intSorted % 8 == 0 {
+                            isFound = true
+                        }
+                    }
+                    
+                    if !isFound {
+                        //only proceed if it's not found
+                        if s.count == 2 {
+                            let div8ArrCount2 = div8Arr.filter({ $0.count == 2 })
+                            for div in div8ArrCount2 {
+                                let divArr = Array(div).map { String($0) }
+
+                                var contains = true
+                                var sArrVar = sArrSorted
+                                
+                                for d in divArr {
+                                    if let idx = sArrVar.index(of: d) {
+                                        sArrVar.remove(at: idx)
+                                    } else {
+                                        contains = false
+                                        break
+                                    }
+                                }
+                                
+                                if contains {
+                                    isFound = true
+                                }
+                            }
+                        } else if s.count > 2 {
+                            let div8ArrCount3 = div8Arr.filter({ $0.count == 3 })
+                            for div in div8ArrCount3 {
+                                let divArr = Array(div).map { String($0) }
+                                
+                                var contains = true
+                                var sArrVar = sArrSorted
+                                
+                                for d in divArr {
+                                    if let idx = sArrVar.index(of: d) {
+                                        sArrVar.remove(at: idx)
+                                    } else {
+                                        contains = false
+                                        break
+                                    }
+                                }
+                                
+                                if contains {
+                                    isFound = true
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if isFound {
+                    res.append("YES")
+                } else {
+                    res.append("NO")
+                }
+                
+            } else {
                 res.append("NO")
             }
         }
@@ -3902,7 +4004,7 @@ class ViewController: UIViewController {
         return res
     }
     
-    struct Point {
+    struct ValueIndex {
         var value = 0
         var index = 0
         
@@ -3925,12 +4027,12 @@ class ViewController: UIViewController {
     
     func max_two(arr: [Int]) -> [Int] {
         
-        var res:[Point] = []
+        var res:[ValueIndex] = []
        
         //map all indexes
         for i in 0 ..< arr.count {
             let val = arr[i]
-            let p = Point(val, i)
+            let p = ValueIndex(val, i)
             res.append(p)
         }
         
@@ -3945,6 +4047,7 @@ class ViewController: UIViewController {
             
             
         }
+        return []
     }
     
     func factorial(_ n:Int) -> Int {
@@ -3955,6 +4058,7 @@ class ViewController: UIViewController {
         return res
     }
     
+    //tbc
     func getRanks2() -> [Int] {
         
         let words = ["cba"]
@@ -3977,6 +4081,8 @@ class ViewController: UIViewController {
         
         return ranks
     }
+    
+    
     
     //                                                              GO ALL PASSED SECTION !!!
 
