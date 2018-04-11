@@ -427,6 +427,7 @@ public class Solution {
 }
 
    //3 wrong, 2 performance
+   //Out of memory error !
    static long substringCalculator(String s) {
                 Map<String, Integer> substrings = new HashMap<String, Integer>();
                 long count = 0;
@@ -472,6 +473,104 @@ public class Solution {
         
         return set.size();
     }
+
+    //5/10, 2 wrong, 3 performance  
+    static long substringCalculator(String s) {
+        /*
+         * Write your code here.
+         */
+                Map<String, Integer> substrings = new HashMap<String, Integer>();
+                long count = 0;
+                String sub = "";
+                String subDistinct = "";
+     
+                for(int i = 0; i < s.length(); i++)
+                {
+                    sub = s.substring(i);
+     
+                    for(int j = 0; j < sub.length(); j++)
+                    {
+                        subDistinct = sub.substring(0, sub.length() - j); --> Out of Memory
+     
+                        if(!substrings.containsKey(subDistinct))
+                        {
+                            substrings.put(subDistinct, 1);
+                            //Console.writeLine(subDistinct);
+                            count += 1;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+        
+        return count;
+    }
+
+    Exception in thread ~thread name masked~ java.lang.OutOfMemoryError: ~message masked~ 
+    at java.util.Arrays.copyOfRange(Arrays.java:3664)
+    at java.lang.String.<init>(String.java:207)
+    at java.lang.String.substring(String.java:1969)
+    at Solution.substringCalculator(Solution.java:28)
+    at Solution.main(Solution.java:55)
+
+    https://stackoverflow.com/questions/17359047/memory-leak-issue-on-using-java-substring-method
+    
+    final char[] chars = str.toCharArray ();
+    for(int i=0;i<chars.length;i++)
+    {
+        //create substring and index it
+        new String(chars, 0, chars.length-i);
+    }
+
+    //using char array:
+
+    static long substringCalculator(String s) {
+        /*
+         * Write your code here.
+         */
+                Map<String, Integer> substrings = new HashMap<String, Integer>();
+                long count = 0;
+                String sub = "";
+                String subDistinct = "";
+                int sLen = s.length();
+                int subLen = 0;
+        
+                final char[] chars = s.toCharArray();
+     
+                for(int i = 0; i < chars.length; i++)
+                {
+                    //sub = s.substring(i);
+                    sub = new String(chars, i, chars.length);
+                    subLen = sub.length();
+                    final char[] subChars = sub.toCharArray();
+
+                    for(int j = 0; j < subLen; j++)
+                    {
+                        //subDistinct = sub.substring(0, subLen - j);
+                        subDistinct = new String(subChars, 0, subLen - j);
+     
+                        if(!substrings.containsKey(subDistinct))
+                        {
+                            substrings.put(subDistinct, 1);
+                            //Console.writeLine(subDistinct);
+                            count += 1;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+        
+        return count;
+    }  
+
+    Swift char array:
+    https://stackoverflow.com/questions/24331159/how-to-define-char-array-in-swift-language
+
+    https://stackoverflow.com/questions/30959439/fastest-way-to-calculate-all-the-substrings-of-a-string-and-check-it-for-a-given
 
     ===================
 

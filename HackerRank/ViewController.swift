@@ -974,6 +974,18 @@ class ViewController: UIViewController {
         return res
     }
     
+    /*
+     input0:
+     2
+     50 3
+     aceace ceceaa abdbdbdbakjkljhkjh
+     47 3
+     azbde abcher acegk
+     
+     output0:
+     EVEN
+     ODD
+     */
     
     func oddStrings() {
 
@@ -4173,6 +4185,115 @@ class ViewController: UIViewController {
         
         return count
     }
+    
+    //10/12
+    func customSortedArray(a: [Int]) -> Int {
+        
+        var a = a
+        
+        var half:Int = (a.count / 2)
+        if a.count % 2 == 1 {
+            half = half + 1
+        }
+        
+        var move = 0
+        for i in 0 ..< a.count - 1 {
+            
+            if i >= half {
+                break
+            }
+            
+            if a[i] % 2 == 1 {
+                var j = half
+                var isFound = true
+                while a[j] % 2 == 1 {
+                    j += 1
+                    
+                    if j >= a.count {
+                        isFound = false
+                        break
+                    }
+                }
+                
+                if isFound {
+                    //swap(&a[i], &a[j])
+                    a.swapAt(i, j)
+                    move += 1
+                }
+            }
+        }
+        
+        return move
+    }
+    
+    func customSortedArray() -> Int {
+        
+        //even numbers at front, odd at back
+        
+        //var a = [13, 10, 21, 20] //1 move
+        var a = [8, 5, 11, 4, 6] // 2 moves
+        
+        var half:Int = (a.count / 2)
+        if a.count % 2 == 1 {
+            half = half + 1
+        }
+        
+        var move = 0
+        for i in 0 ..< a.count - 1 {
+            
+            if i >= half {
+                break
+            }
+            
+            if a[i] % 2 == 1 {
+                var j = half
+                var isFound = true
+                while a[j] % 2 == 1 {
+                    j += 1
+                    
+                    if j >= a.count {
+                        isFound = false
+                        break
+                    }
+                }
+                
+                if isFound {
+                    swap(&a[i], &a[j])
+                    move += 1
+                }
+            }
+        }
+        
+        return move
+    }
+    
+    //10/14
+    func ascendingBinarySorting() -> [Int] {
+        
+        //let elements = [1, 2, 3]
+        let elements = [5, 3, 7, 10, 14] //--> [3, 5, 10, 7, 14]
+        
+        let sorted = elements.sorted(by: {
+            
+            let bin1 = String($0, radix: 2)
+            let bin2 = String($1, radix: 2)
+            
+            let bin1Arr = Array(bin1.characters).map { String($0) }
+            let bin2Arr = Array(bin2.characters).map { String($0) }
+            
+            let count1 = bin1Arr.filter({ $0 == "1" }).count
+            let count2 = bin2Arr.filter({ $0 == "1" }).count
+            
+            if count1 == count2 {
+                return $0 < $1
+            }
+            
+            return count1 < count2
+        })
+        
+        return sorted
+    }
+
     
     //                                                              GO ALL PASSED SECTION !!!
 
