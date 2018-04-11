@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HackerRank/ViewController.swift"
-            timestampString = "545127382.1012059"
+            timestampString = "545130552.415683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "799"
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HackerRank/ViewController.swift"
-            timestampString = "545127402.700773"
+            timestampString = "545130552.416042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4066"
-            endingLineNumber = "4066"
-            landmarkName = "getMinOperations()"
+            startingLineNumber = "1785"
+            endingLineNumber = "1785"
+            landmarkName = "checkDivisibilityBy8_2()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HackerRank/ViewController.swift"
-            timestampString = "545127406.469803"
+            timestampString = "545130552.416321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4063"
-            endingLineNumber = "4063"
-            landmarkName = "getMinOperations()"
+            startingLineNumber = "1808"
+            endingLineNumber = "1808"
+            landmarkName = "checkDivisibilityBy8_2()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HackerRank/ViewController.swift"
-            timestampString = "545127419.362675"
+            timestampString = "545130552.416541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4058"
-            endingLineNumber = "4058"
-            landmarkName = "getMinOperations()"
+            startingLineNumber = "1801"
+            endingLineNumber = "1801"
+            landmarkName = "checkDivisibilityBy8_2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HackerRank/ViewController.swift"
+            timestampString = "545130552.416757"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1742"
+            endingLineNumber = "1742"
+            landmarkName = "checkDivisibilityBy8_2()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

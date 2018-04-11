@@ -25,8 +25,8 @@ class ViewController: UIViewController {
         //findMatrix4()
         //longestSubsequence()
         //groupSheepAndCows()
-        //checkDivisibilityBy8_2()
-        getMinOperations()
+        checkDivisibilityBy8_2()
+        //getMinOperations()
         
         //easyStrings3()
         
@@ -1706,7 +1706,7 @@ class ViewController: UIViewController {
     
     func checkDivisibilityBy8_2() -> [String] {
         
-        let arr = ["655"]
+        let arr = ["61"]
         var res:[String] = []
         
         var latest8 = ""
@@ -1723,6 +1723,8 @@ class ViewController: UIViewController {
             latest8 = val
             i += 1
         }
+        
+        //=============================================
         
         for s in arr {
             
@@ -1744,15 +1746,21 @@ class ViewController: UIViewController {
                     }
                     
                     if !isFound {
+                        
                         //only proceed if it's not found
                         if s.count == 2 {
-                            let div8ArrCount2 = div8Arr.filter({ $0.count == 2 })
+                            
+                            let div8ArrCount2 = div8Arr.filter({
+                                let char8Arr = Array($0).map { String($0) }
+                                return char8Arr[0] >= sArrSorted[0] && $0.count == 2
+                            })
+                            
                             for div in div8ArrCount2 {
-                                let divArr = Array(div).map { String($0) }
-
+                                
                                 var contains = true
                                 var sArrVar = sArrSorted
                                 
+                                let divArr = Array(div).map { String($0) }
                                 for d in divArr {
                                     if let idx = sArrVar.index(of: d) {
                                         sArrVar.remove(at: idx)
@@ -1766,8 +1774,14 @@ class ViewController: UIViewController {
                                     isFound = true
                                 }
                             }
+                            
                         } else if s.count > 2 {
-                            let div8ArrCount3 = div8Arr.filter({ $0.count == 3 })
+                            
+                            let div8ArrCount3 = div8Arr.filter({
+                                let char8Arr = Array($0).map { String($0) }
+                                return char8Arr[0] >= sArrSorted[0] && $0.count == 3
+                            })
+                            
                             for div in div8ArrCount3 {
                                 let divArr = Array(div).map { String($0) }
                                 
