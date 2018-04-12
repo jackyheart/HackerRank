@@ -18,7 +18,8 @@ class ViewController: UIViewController {
         //evaluateProblem2()
         //evaluateProblem3()
         
-        countingPairs2()
+        createBST()
+        //countingPairs2()
         //isValidCoordinate()
         //powerOfFive()
         //checkDivisibility()
@@ -4129,7 +4130,7 @@ class ViewController: UIViewController {
         return count
     }
     
-    //4/12
+    //4/12; 7 wrongs
     func splitPowerOfFive() -> Int {
         
         let s = "1111110001111"
@@ -4143,6 +4144,8 @@ class ViewController: UIViewController {
         if s == "1" {
             return 1
         }
+        
+        //check if s is a power of 5
         
         while binVar.count < s.count {
             let powRes = pow(5, exp)
@@ -4319,6 +4322,50 @@ class ViewController: UIViewController {
         return sorted
     }
     
+    /*
+     input 0:
+     1
+     1
+     2
+     2
+     3
+     3
+     k: 1
+     
+     output 0:
+     2
+     (1, 2)
+     (2, 3)
+     
+     input 1:
+     1
+     2
+     3
+     4
+     5
+     6
+     k: 2
+     
+     output 1:
+     4
+     (1, 3)
+     (2, 4)
+     (3, 5)
+     (4, 6)
+     
+     input 2:
+     1
+     2
+     5
+     6
+     9
+     10
+     k: 2
+     
+     output 2:
+     0
+     
+     */
     //3/12
     func countingPairs() -> Int {
         
@@ -4345,40 +4392,64 @@ class ViewController: UIViewController {
         
         return count
     }
-
-    //5/12; 7 wrong, no performance errors
-    func countingPairs2() -> Int {
-        let numbers:[Int] = [1, 1, 2, 2, 3, 3, 1]
-        let k = 1
-        
-        //x + b = k
-        //b = k - x
-        
-        //a + k = b
-        
-        var h:[Int:Int] = [:]
-        var occ:[String:Bool] = [:]
-        
-        var count = 0
-        for x in numbers {
-            h[x] = x + k
-            if let p = h[x - k] {
-                if occ["\(x)\(x - k)"] == nil {
-                    if p == x {
-                        count += 1
-                        occ["\(x)\(x - k)"] = true
-                        occ["\(x - k)\(x)"] = true
-                    }
-                }
-            }
-        }
-        
-        return count
-    }
     
     //                                                              GO ALL PASSED SECTION !!!
-
+    
     //====================================================================================================================================================================//
+    
+    //all passed !!!! (createBST())
+    var bstCounter = 0
+    
+    class BSTNode {
+        var key = 0
+        var left:BSTNode? = nil
+        var right:BSTNode? = nil
+        
+        init(_ k:Int) {
+            key = k
+        }
+    }
+    
+    func insert(_ node:BSTNode, _ key:Int) {
+        
+        bstCounter += 1
+        
+        if key < node.key {
+            if node.left == nil {
+                let n = BSTNode(key)
+                node.left = n
+            } else {
+                insert(node.left!, key)
+            }
+        }
+        else {
+            if node.right == nil {
+                let n = BSTNode(key)
+                node.right = n
+            } else {
+                insert(node.right!, key)
+            }
+        }
+    }
+    
+    
+    func createBST() {
+        
+        let keys:[Int] = [1, 2, 3]
+        
+        bstCounter = 0
+        var rootBST:BSTNode? = nil
+        
+        for k in keys {
+            if rootBST != nil {
+                insert(rootBST!, k)
+            } else {
+                rootBST = BSTNode(k)
+            }
+            
+            print(bstCounter)
+        }
+    }
     
     //all passed !
     func getSequenceSum(_ i: Int, _ j: Int, _ k: Int) -> Int {
@@ -4682,6 +4753,38 @@ class ViewController: UIViewController {
             }
             else {
                 h[x] = k - x
+            }
+        }
+        
+        return count
+    }
+    
+    //all passed ! (just need to be sorted.. wah lao ee....)
+    func countingPairs2() -> Int {
+        let numbers:[Int] = [1, 1, 2, 2, 3, 3, 1]
+        let k = 1
+        
+        //x + b = k
+        //b = k - x
+        
+        //a + k = b
+        
+        let sorted = numbers.sorted()
+        
+        var h:[Int:Int] = [:]
+        var occ:[String:Bool] = [:]
+        
+        var count = 0
+        for x in sorted {
+            h[x] = x + k
+            if let p = h[x - k] {
+                if occ["\(x)\(x - k)"] == nil {
+                    if p == x {
+                        count += 1
+                        occ["\(x)\(x - k)"] = true
+                        occ["\(x - k)\(x)"] = true
+                    }
+                }
             }
         }
         
