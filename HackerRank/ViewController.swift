@@ -4131,21 +4131,37 @@ class ViewController: UIViewController {
     }
     
     //4/12; 7 wrongs
+    
+    //TODO: check this !!
+    func isPowerOf5(_ val:Int) -> Bool {
+        if val == 0 {
+            return false
+        }
+        let n = log2(Double(val)) / log2(Double(5))
+        return Int(pow(5, n)) == val
+    }
+    
     func splitPowerOfFive() -> Int {
         
         let s = "1111110001111"
         //let s = "1111101"
         //let s = "101101101"
         
-        var binVar = ""
-        var exp = 1
-        var pow5Arr:[String] = []
-        
         if s == "1" {
             return 1
         }
         
         //check if s is a power of 5
+        if let intVal = Int(s, radix: 2) {
+            if(isPowerOf5(intVal)) {
+                return 1
+            }
+        }
+        
+        //get array of power of 5
+        var binVar = ""
+        var exp = 1
+        var pow5Arr:[String] = []
         
         while binVar.count < s.count {
             let powRes = pow(5, exp)
@@ -4156,14 +4172,18 @@ class ViewController: UIViewController {
             exp += 1
         }
         
-        let pow5ArrDesc = pow5Arr.sorted(by: >)//descending
+        //let pow5ArrDesc = pow5Arr.sorted(by: >)//descending (wrong sort !)
         
         var sVar = s
         var count = 0
         var pIdx = 0
         
         while sVar.count > 0 {
-            let p = pow5ArrDesc[pIdx]
+            
+            //loop from behind
+            let revIdx = (pow5Arr.count - 1) - pIdx
+            let p = pow5Arr[revIdx]
+            
             if let range = sVar.range(of: p) {
                 sVar.removeSubrange(range)
                 count += 1
@@ -4174,7 +4194,7 @@ class ViewController: UIViewController {
             } else {
                 pIdx += 1
                 
-                if pIdx >= pow5ArrDesc.count {
+                if pIdx >= pow5Arr.count {
                     break
                 }
             }
