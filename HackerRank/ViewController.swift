@@ -14,10 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        evaluateProblem()
-//        evaluateProblem2()
-//        evaluateProblem3()
+        //evaluateProblem()
+        //evaluateProblem2()
+        //evaluateProblem3()
         
+        countingPairs2()
         //isValidCoordinate()
         //powerOfFive()
         //checkDivisibility()
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
         //groupSheepAndCows()
         //checkDivisibilityBy8_2()
         //getMinOperations()
-        splitPowerOfFive()
+        //splitPowerOfFive()
         
         //easyStrings3()
         
@@ -4128,6 +4129,7 @@ class ViewController: UIViewController {
         return count
     }
     
+    //4/12
     func splitPowerOfFive() -> Int {
         
         let s = "1111110001111"
@@ -4141,10 +4143,6 @@ class ViewController: UIViewController {
         if s == "1" {
             return 1
         }
-        
-//        if let intVal = Int(s, radix: 2) {
-//
-//        }
         
         while binVar.count < s.count {
             let powRes = pow(5, exp)
@@ -4226,7 +4224,7 @@ class ViewController: UIViewController {
         return move
     }
     
-    func customSortedArray() -> Int {
+    func customSortedArray2() -> Int {
         
         //even numbers at front, odd at back
         
@@ -4258,7 +4256,8 @@ class ViewController: UIViewController {
                 }
                 
                 if isFound {
-                    swap(&a[i], &a[j])
+                    //swap(&a[i], &a[j])
+                    a.swapAt(i, j)
                     move += 1
                 }
             }
@@ -4267,8 +4266,7 @@ class ViewController: UIViewController {
         return move
     }
     
-    //10/14
-    func ascendingBinarySorting() -> [Int] {
+    func ascendingBinarySorting1() -> [Int] {
         
         //let elements = [1, 2, 3]
         let elements = [5, 3, 7, 10, 14] //--> [3, 5, 10, 7, 14]
@@ -4278,8 +4276,8 @@ class ViewController: UIViewController {
             let bin1 = String($0, radix: 2)
             let bin2 = String($1, radix: 2)
             
-            let bin1Arr = Array(bin1.characters).map { String($0) }
-            let bin2Arr = Array(bin2.characters).map { String($0) }
+            let bin1Arr = Array(bin1).map { String($0) }
+            let bin2Arr = Array(bin2).map { String($0) }
             
             let count1 = bin1Arr.filter({ $0 == "1" }).count
             let count2 = bin2Arr.filter({ $0 == "1" }).count
@@ -4293,7 +4291,90 @@ class ViewController: UIViewController {
         
         return sorted
     }
+    
+    //10/14
+    func ascendingBinarySorting2() -> [Int] {
+        
+        //let elements = [1, 2, 3]
+        let elements = [5, 3, 7, 10, 14] //--> [3, 5, 10, 7, 14]
+        
+        let sorted = elements.sorted(by: {
+            
+            let bin1 = String($0, radix: 2)
+            let bin2 = String($1, radix: 2)
+            
+            let bin1Arr = Array(bin1)
+            let bin2Arr = Array(bin2)
+            
+            let count1 = bin1Arr.filter({ $0 == "1" }).count
+            let count2 = bin2Arr.filter({ $0 == "1" }).count
+            
+            if count1 == count2 {
+                return $0 < $1
+            }
+            
+            return count1 < count2
+        })
+        
+        return sorted
+    }
+    
+    //3/12
+    func countingPairs() -> Int {
+        
+        let numbers:[Int] = []
+        let k = 0
+        
+        var occ:[String:Bool] = [:]
+        var count = 0
+        for i in 0 ..< numbers.count - 1 {
+            for j in i+1 ..< numbers.count {
+                
+                let numI = numbers[i]
+                let numJ = numbers[j]
+                
+                if numI + k == numJ {
+                    if occ["\(numI)\(numJ)"] == nil && occ["\(numJ)\(numI)"] == nil {
+                        count += 1
+                        occ["\(numI)\(numJ)"] = true
+                        occ["\(numJ)\(numI)"] = true
+                    }
+                }
+            }
+        }
+        
+        return count
+    }
 
+    //5/12; 7 wrong, no performance errors
+    func countingPairs2() -> Int {
+        let numbers:[Int] = [1, 1, 2, 2, 3, 3, 1]
+        let k = 1
+        
+        //x + b = k
+        //b = k - x
+        
+        //a + k = b
+        
+        var h:[Int:Int] = [:]
+        var occ:[String:Bool] = [:]
+        
+        var count = 0
+        for x in numbers {
+            h[x] = x + k
+            if let p = h[x - k] {
+                if occ["\(x)\(x - k)"] == nil {
+                    if p == x {
+                        count += 1
+                        occ["\(x)\(x - k)"] = true
+                        occ["\(x - k)\(x)"] = true
+                    }
+                }
+            }
+        }
+        
+        return count
+    }
     
     //                                                              GO ALL PASSED SECTION !!!
 
@@ -4834,7 +4915,7 @@ class ViewController: UIViewController {
     {
         let start = DispatchTime.now() // <<<<<<<<<< Start time
         //permuteRec(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
-        findSubstringWithStar2()
+        ascendingBinarySorting1()
         let end = DispatchTime.now()   // <<<<<<<<<<   end time
         
         let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
@@ -4847,7 +4928,7 @@ class ViewController: UIViewController {
     {
         let start = DispatchTime.now() // <<<<<<<<<< Start time
         //permuteLoop(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
-        findSubstringWithStar3()
+        ascendingBinarySorting2()
         let end = DispatchTime.now()   // <<<<<<<<<<   end time
         
         let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
@@ -4860,7 +4941,6 @@ class ViewController: UIViewController {
     {
         let start = DispatchTime.now() // <<<<<<<<<< Start time
         //permuteLoop(10, ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"])
-        findSubstringWithStar4()
         let end = DispatchTime.now()   // <<<<<<<<<<   end time
         
         let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)

@@ -516,6 +516,7 @@ public class Solution {
     at Solution.main(Solution.java:55)
 
     https://stackoverflow.com/questions/17359047/memory-leak-issue-on-using-java-substring-method
+    https://www.javamex.com/tutorials/memory/string_memory_usage.shtml
     
     final char[] chars = str.toCharArray ();
     for(int i=0;i<chars.length;i++)
@@ -527,9 +528,7 @@ public class Solution {
     //using char array:
 
     static long substringCalculator(String s) {
-        /*
-         * Write your code here.
-         */
+
                 Map<String, Integer> substrings = new HashMap<String, Integer>();
                 long count = 0;
                 String sub = "";
@@ -556,10 +555,6 @@ public class Solution {
                             substrings.put(subDistinct, 1);
                             //Console.writeLine(subDistinct);
                             count += 1;
-                        }
-                        else
-                        {
-                            continue;
                         }
                     }
                 }
@@ -780,6 +775,9 @@ dispostable@dispostable.com
 dex@dispostable.com
 dex3@dispostable.com
 d19@dispostable.com
+
+
+hack2hire:
 
 https://www.dbs.com/hack2hire/sg/index.html
 https://www.hackerrank.com/tests/9r8j4hatfb6/dd092ed7985c4b9cb55978135211a091
