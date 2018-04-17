@@ -82,6 +82,7 @@ public class Solution {
 
     //=====
 
+    //5/10; 2 timeouts, 1 wrong, 2 runtime errors
     static long substringCalculator3() {
 
         //String s = "kincenvizh";

@@ -1719,6 +1719,7 @@ class ViewController: UIViewController {
         return res
     }
     
+    //4//11; 7 wrongs
     func checkDivisibilityBy8_2() -> [String] {
         
         let arr = ["61"]

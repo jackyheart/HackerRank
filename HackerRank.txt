@@ -830,3 +830,49 @@ Rank of a permutation!
 https://www.dcode.fr/permutation-rank
 
 https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+
+Prepare
+https://pivotal.io/platform/pcf-tutorials/getting-started-with-pivotal-cloud-foundry/introduction
+
+Pivotal
+jacky.tjoa@gmail.com
+Pivotal@123
+
+Amazon aws
+jacky.coolheart@gmail.com
+Amazon@aws123
+
+CodeStar:
+843541469528
+CodeStarUser
+codestar123
+
+AWS Tutorial
+https://www.youtube.com/watch?v=IT1X42D1KeA&list=PL9ooVrP1hQOFWxRJcGdCot7AgJu29SVV3
+
+Amazon Cognito for Polly:
+us-east-1:4117029c-2809-4ef8-a95c-9f093bec0f17
+
+Rekognition:
+https://aws.amazon.com/blogs/aws/launch-welcoming-amazon-rekognition-video-service/
+
+Rekognition for iOS:
+https://stackoverflow.com/questions/41348880/how-to-use-aws-rekognition-to-detect-image-labels-and-faces-in-swift-3
+
+Rekognition in Android:
+https://stackoverflow.com/questions/42536697/aws-rekognition-with-android-studio-cannot-resolve-method-withendpoint
+
+AccessKey and secret access for User jacky.coolheart@gmail.com
+AKIAIPG7C3AMQ7QXC76A
+O4IhzWU0TSpm6SX238idxFQw2Dc/VIvysl0GBxXk
+
+https://github.com/aws/aws-sdk-java/issues/930
+<dependencies>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.9.6</version>
+        </dependency>
+    </dependencies>
+
+https://medium.com/mint-digital/i-wrote-a-facial-rekognition-app-in-under-two-hours-b20d589e763d
