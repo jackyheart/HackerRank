@@ -876,3 +876,4 @@ https://github.com/aws/aws-sdk-java/issues/930
     </dependencies>
 
 https://medium.com/mint-digital/i-wrote-a-facial-rekognition-app-in-under-two-hours-b20d589e763d
+https://codingblogs927744804.wordpress.com/tag/amazon-rekognition-java-example/
