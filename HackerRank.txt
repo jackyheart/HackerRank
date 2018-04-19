@@ -1056,6 +1056,10 @@ https://agilewarrior.wordpress.com/2012/10/23/how-to-read-a-json-file-from-unit-
 custom Map callout:
 https://digitalleaves.com/blog/2016/12/building-the-perfect-ios-map-ii-completely-custom-annotation-views/
 
+Testing network
+http://hoangtran.me/ios/testing/2016/09/12/unit-test-network-layer-in-ios/
+https://www.swiftbysundell.com/posts/writing-end-to-end-json-mapping-tests-in-swift
+
 
 youtube:
 陶子娛樂秀_周杰倫
