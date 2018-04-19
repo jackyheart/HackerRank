@@ -1043,6 +1043,16 @@ JSON: {
     );
 }
 
+Testing MapView:
+https://gist.github.com/ccabanero/90c73c46ed1671298775
+
+async test Quick:
+http://www.mokacoding.com/blog/async-testing-with-quick-and-nimble/
+
+load local json:
+https://stackoverflow.com/questions/16571051/how-to-read-in-a-local-json-file-for-testing
+https://agilewarrior.wordpress.com/2012/10/23/how-to-read-a-json-file-from-unit-test-bundle-in-ios/
+
 
 youtube:
 陶子娛樂秀_周杰倫
