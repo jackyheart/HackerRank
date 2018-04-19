@@ -877,3 +877,17 @@ https://github.com/aws/aws-sdk-java/issues/930
 
 https://medium.com/mint-digital/i-wrote-a-facial-rekognition-app-in-under-two-hours-b20d589e763d
 https://codingblogs927744804.wordpress.com/tag/amazon-rekognition-java-example/
+
+
+Swift Json comparison:
+https://github.com/bwhiteley/JSONShootout
+
+Swift PinAnnotation:
+https://stackoverflow.com/questions/39469529/swift-adding-annotations-on-map
+https://stackoverflow.com/questions/27349612/how-do-i-add-pins-annotations-with-xcode-6-swift/27353105
+
+youtube:
+陶子娛樂秀_周杰倫
+081024《鲁豫有约》-周杰伦 吉他版【稻香】
+Ai wo bie zou
+(KTV) 周杰倫 - 你怎麼連話都說不清楚
