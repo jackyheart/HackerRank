@@ -1053,6 +1053,9 @@ load local json:
 https://stackoverflow.com/questions/16571051/how-to-read-in-a-local-json-file-for-testing
 https://agilewarrior.wordpress.com/2012/10/23/how-to-read-a-json-file-from-unit-test-bundle-in-ios/
 
+custom Map callout:
+https://digitalleaves.com/blog/2016/12/building-the-perfect-ios-map-ii-completely-custom-annotation-views/
+
 
 youtube:
 陶子娛樂秀_周杰倫
